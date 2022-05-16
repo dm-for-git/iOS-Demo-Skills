@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Mgb-mP-hfp">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--News-->
+        <scene sceneID="1UZ-nd-bdp">
+            <objects>
+                <hostingController id="nBz-Ib-JEr" customClass="HostingViewController" customModule="MetaWeather" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="News" image="tab_news_item" id="8E5-w1-g03"/>
+                </hostingController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rid-6c-WdD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-119" y="-592"/>
+        </scene>
+        <!--Video-->
+        <scene sceneID="tKf-Uu-3XL">
+            <objects>
+                <collectionViewController storyboardIdentifier="VideoViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Jts-zO-6x5" customClass="VideoViewController" customModule="MetaWeather" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="j8K-Pv-Z7r">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" name="#EFFAFD"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="2cY-h9-gcr">
+                            <size key="itemSize" width="128" height="128"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells/>
+                        <connections>
+                            <outlet property="dataSource" destination="Jts-zO-6x5" id="tWW-6s-Gk9"/>
+                            <outlet property="delegate" destination="Jts-zO-6x5" id="wFV-ND-J0k"/>
+                        </connections>
+                    </collectionView>
+                    <tabBarItem key="tabBarItem" title="Video" image="tab_video_item" id="4d6-u8-Ajo">
+                        <color key="badgeColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </tabBarItem>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vpk-TO-9JS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-131" y="125"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="kBg-7j-Ue6">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Mgb-mP-hfp" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5y9-1p-T5S">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" name="#EFFAFD"/>
+                        <color key="tintColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" name="#EFFAFD"/>
+                        <color key="selectedImageTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="Jts-zO-6x5" kind="relationship" relationship="viewControllers" id="KgW-Dn-dSi"/>
+                        <segue destination="s9p-FB-J18" kind="relationship" relationship="viewControllers" id="qTS-bE-NDd"/>
+                        <segue destination="nBz-Ib-JEr" kind="relationship" relationship="viewControllers" id="dTM-Ad-CYu"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Psg-al-lug" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1051.875" y="124.64788732394366"/>
+        </scene>
+        <!--Weather View Controller-->
+        <scene sceneID="ytk-Lo-MIY">
+            <objects>
+                <tableViewController storyboardIdentifier="WeatherViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="VB3-tY-3Dz" customClass="WeatherViewController" customModule="MetaWeather" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="k6u-Md-4Zn">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <connections>
+                            <outlet property="dataSource" destination="VB3-tY-3Dz" id="AGc-Kt-f4u"/>
+                            <outlet property="delegate" destination="VB3-tY-3Dz" id="otx-hp-L2Y"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="xIU-DC-Nxb"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jmt-pZ-ttx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-119" y="922"/>
+        </scene>
+        <!--Result View Controller-->
+        <scene sceneID="PxJ-fU-CPr">
+            <objects>
+                <tableViewController storyboardIdentifier="ResultViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NoK-DF-3ST" customClass="ResultViewController" customModule="MetaWeather" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="Ijh-fh-jaZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ResultCell" id="Hf0-kk-V1P">
+                                <rect key="frame" x="0.0" y="44.5" width="375" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Hf0-kk-V1P" id="TKa-39-P6I">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="NoK-DF-3ST" id="jPh-QF-z9N"/>
+                            <outlet property="delegate" destination="NoK-DF-3ST" id="oC9-KY-qE5"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="Ug4-76-e0I"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rVO-Qt-hoA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="793" y="922"/>
+        </scene>
+        <!--Weather-->
+        <scene sceneID="oJy-Bk-6Hm">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="s9p-FB-J18" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Weather" image="tab_weather_item" id="qBx-q3-P0X">
+                        <color key="badgeColor" systemColor="systemOrangeColor"/>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="8CF-cf-0iV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="VB3-tY-3Dz" kind="relationship" relationship="rootViewController" id="aTk-9p-KNe"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XK5-DF-rh5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1052" y="922"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="tab_news_item" width="32" height="32"/>
+        <image name="tab_video_item" width="32" height="32"/>
+        <image name="tab_weather_item" width="32" height="32"/>
+        <namedColor name="#EFFAFD">
+            <color red="0.93725490196078431" green="0.98039215686274506" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

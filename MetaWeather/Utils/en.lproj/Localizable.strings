@@ -1,0 +1,27 @@
+/* 
+  Localizable.strings
+  MetaWeather
+
+  Created by David Martin on 25/01/2022.
+  
+*/
+
+// MARK: Weather
+"searchBarPlaceHolder" = "Search for city here";
+"cellTimeLabel" = "Last update";
+
+// MARK: Dialog
+"dialogTitleError" = "Error";
+"dialogTitleSuccess" = "Success";
+"dialogTitleInfor" = "Info";
+"dialogTitleWarning" = "Warning";
+"dialogUpdateDataSuccess" = "Update data sucessfully";
+"dialogUpdateDataFail" = "Can't update data, pull to refresh data";
+"dialogLostInternet" = "Internet connection is lost";
+"dialogInternetComeback" = "Internet connection is comeback";
+
+// MARK: Error Messages
+"msgCantLoadData" = "Can't load data, please try again later";
+"msgInternetLost" = "Internet connection is lost, try again later";
+"msgCantPlayVideo" = "Video can't be played";
+"errCantPlayInPiP" = "This device doesn't support PiP mode";

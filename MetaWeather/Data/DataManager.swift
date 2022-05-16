@@ -1,0 +1,122 @@
+//
+//  DataManager.swift
+//  MetaWeather
+//
+//  Created by DavidMartin on 8/6/21.
+//
+
+import Foundation
+import CoreData
+import UIKit
+
+class DataManager: NSCopying {
+    
+    static let shared = DataManager()
+    
+    // Prevent instance of this object to be cloned
+    func copy(with zone: NSZone? = nil) -> Any {
+        return self
+    }
+    
+    func insertWeather(weather: Weather, handler: @escaping(Result<Bool, CustomError>) -> Void) {
+        DispatchQueue.main.async {
+            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+                handler(.failure(.unknownError))
+                return
+            }
+            let queue = OperationQueue()
+            queue.maxConcurrentOperationCount = 3
+            queue.addOperation {
+                let context = appDelegate.persistentContainer.viewContext
+                
+                let weatherEntity = WeatherEntity(context: context)
+                weatherEntity.currentTemp = weather.currentTemp ?? 0
+                weatherEntity.maxTemp = weather.maxTemp ?? 0
+                weatherEntity.minTemp = weather.minTemp ?? 0
+                weatherEntity.lastUpdate = weather.lastUpdated
+                weatherEntity.stateAbbr = weather.stateAbbr
+                weatherEntity.stateName = weather.stateName
+                
+                do {
+                    try context.save()
+                    handler(.success(true))
+                } catch {
+                    print("Data Error = \(error)")
+                    handler(.failure(error as! CustomError))
+                }
+            }
+            queue.waitUntilAllOperationsAreFinished()
+        }
+    }
+    
+    func fetchAllWeathers(handler: @escaping(Result<[Weather], CustomError>) -> Void) {
+        DispatchQueue.main.async {
+            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+                handler(.failure(.unknownError))
+                return
+            }
+            let queue = OperationQueue()
+            queue.maxConcurrentOperationCount = 3
+            
+            queue.addOperation {
+                
+                let context = appDelegate.persistentContainer.viewContext
+                
+                do {
+                    let weatherEntities = try context.fetch(WeatherEntity.fetchRequest()) as? [WeatherEntity]
+                    if let weatherEntities = weatherEntities, !weatherEntities.isEmpty {
+                        var weathers = [Weather]()
+                        weatherEntities.forEach { item in
+                            var weather = Weather()
+                            weather.lastUpdated = item.lastUpdate
+                            weather.currentTemp = item.currentTemp
+                            weather.maxTemp = item.maxTemp
+                            weather.minTemp = item.minTemp
+                            weather.stateName = item.stateName
+                            weather.stateAbbr = item.stateAbbr
+                            
+                            weathers.append(weather)
+                        }
+                        handler(.success(weathers))
+                    } else {
+                        handler(.failure(.unknownError))
+                    }
+                    
+                } catch {
+                    print("Data Error = \(error.localizedDescription)")
+                    handler(.failure(error as! CustomError))
+                }
+            }
+            queue.waitUntilAllOperationsAreFinished()
+        }
+    }
+    
+    func deleteAllData(handler: @escaping(Result<Bool, CustomError>) -> Void) {
+        DispatchQueue.main.async {
+            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+                handler(.failure(.unknownError))
+                return
+            }
+            let queue = OperationQueue()
+            queue.maxConcurrentOperationCount = 3
+            
+            queue.addOperation {
+                
+                let context = appDelegate.persistentContainer.viewContext
+                
+                let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "WeatherEntity")
+                
+                // Create Batch Delete Request
+                let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+                
+                do {
+                    try context.execute(batchDeleteRequest)
+                    handler(.success(true))
+                } catch {
+                    handler(.failure(error as! CustomError))
+                }
+            }
+            queue.waitUntilAllOperationsAreFinished()
+        }
+    }
+}

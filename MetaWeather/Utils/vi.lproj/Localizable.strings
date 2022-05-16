@@ -1,0 +1,27 @@
+/* 
+  Localizable.strings
+  MetaWeather
+
+  Created by David Martin on 25/01/2022.
+  
+*/
+
+// MARK: Weather
+"searchBarPlaceHolder" = "Tìm tên thành phố";
+"cellTimeLabel" = "Cập nhật lúc";
+
+// MARK: Dialog
+"dialogTitleError" = "Lỗi";
+"dialogTitleSuccess" = "Thành công";
+"dialogTitleInfor" = "Thông tin";
+"dialogTitleWarning" = "Cảnh báo";
+"dialogUpdateDataSuccess" = "Cập nhật dữ liệu thành công";
+"dialogUpdateDataFail" = "Không thể cập nhật dữ liệu, vuốt để thử lại";
+"dialogLostInternet" = "Mất kết nối mạng";
+"dialogInternetComeback" = "Đã có kết nối mạng";
+
+// MARK: Error Messages
+"msgCantLoadData" = "Không thể tải dữ liệu, hãy thử lại sau";
+"msgInternetLost" = "Không có kết nối mạng, hãy thử lại sau";
+"msgCantPlayVideo" = "Không thể hiển thị video";
+"errCantPlayInPiP" = "Thiết bị này không hỗ trợ chế độ PiP";
