@@ -7,17 +7,61 @@
 
 import Foundation
 
-/*
+/**
+ * To get weather status icon by weather status code
+ https://openweathermap.org/img/wn/{weather status code}@2x.png
+ */
+
+/**
  {
- "id": 4565229036896256,
- "weather_state_name": "Showers",
- "weather_state_abbr": "s",
- "created": "2021-08-05T21:56:16.785774Z",
- "min_temp": 13.695,
- "max_temp": 18.555,
- "the_temp": 18
+     "coord": {
+         "lon": 106.7018,
+         "lat": 10.7758
+     },
+     "weather": [
+         {
+             "id": 500,
+             "main": "Rain",
+             "description": "light rain",
+             "icon": "10n"
+         }
+     ],
+     "base": "stations",
+     "main": {
+         "temp": 25.95,
+         "feels_like": 25.95,
+         "temp_min": 25.95,
+         "temp_max": 25.95,
+         "pressure": 1008,
+         "humidity": 89
+     },
+     "visibility": 8000,
+     "wind": {
+         "speed": 3.09,
+         "deg": 180
+     },
+     "rain": {
+         "1h": 0.22
+     },
+     "clouds": {
+         "all": 40
+     },
+     "dt": 1654795281,
+     "sys": {
+         "type": 1,
+         "id": 9314,
+         "country": "VN",
+         "sunrise": 1654813827,
+         "sunset": 1654859692
+     },
+     "timezone": 25200,
+     "id": 1566083,
+     "name": "Ho Chi Minh City",
+     "cod": 200
  }
  */
+
+
 struct Weather: Codable {
     var currentTemp: Float?
     var maxTemp: Float?
