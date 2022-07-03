@@ -8,7 +8,7 @@
 import Foundation
 
 final class ResultViewModel {
-    lazy var arrLocations: [Location] = {
-        return [Location]()
+    lazy var arrLocations: [Coordinate] = {
+        return [Coordinate]()
     }()
 }

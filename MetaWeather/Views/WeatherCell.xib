@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_0" orientation="portrait" appearance="light"/>
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
@@ -40,8 +40,8 @@
                                 <color key="textColor" systemColor="systemRedColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Updated at" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RHf-q9-Bta">
-                                <rect key="frame" x="8" y="67" width="72.5" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ho Chi Minh City" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RHf-q9-Bta">
+                                <rect key="frame" x="8" y="67" width="108.5" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -89,10 +89,10 @@
             <connections>
                 <outlet property="containerView" destination="lmW-O2-Rqt" id="GbX-rX-aho"/>
                 <outlet property="imgWeatherState" destination="X8t-mS-9jG" id="e0T-hu-9jy"/>
+                <outlet property="lblCityName" destination="RHf-q9-Bta" id="5y1-u2-BUR"/>
                 <outlet property="lblCurrentTemp" destination="xvf-PL-3KK" id="0cg-do-Ooa"/>
                 <outlet property="lblMaxTemp" destination="WxQ-5U-XHn" id="9hS-5V-r67"/>
                 <outlet property="lblMinTemp" destination="wbQ-Xd-cNv" id="JWR-AE-XLu"/>
-                <outlet property="lblUpdateTime" destination="RHf-q9-Bta" id="V9J-qw-fsc"/>
                 <outlet property="lblWeatherState" destination="BWn-cJ-kvh" id="7LH-it-tl5"/>
             </connections>
             <point key="canvasLocation" x="116" y="-102"/>

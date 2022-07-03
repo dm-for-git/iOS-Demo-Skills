@@ -11,8 +11,8 @@ class WeatherCell: UITableViewCell {
     
     var weather: Weather? {
         didSet {
-            loadWeatherIconBy(state: weather?.stateAbbr ?? "")
-            lblWeatherState.text = weather?.stateName
+            loadWeatherIconBy(iconCode: weather?.iconCode ?? "")
+            lblWeatherState.text = weather?.status ?? ""
             
             let currentTemp = NSString(format:"\(Int(weather?.currentTemp ?? 0))%@C" as NSString, "\u{00B0}") as String
             lblCurrentTemp.text = currentTemp
@@ -23,7 +23,7 @@ class WeatherCell: UITableViewCell {
             let minTemp = NSString(format:"L: \(Int(weather?.minTemp ?? 0))%@C" as NSString, "\u{00B0}") as String
             lblMinTemp.text = minTemp
             
-            setUpdateTimeBy(timeString: weather?.lastUpdated ?? "")
+//            setUpdateTimeBy(timeString: weather?.lastUpdated ?? "")
         }
     }
     
@@ -40,7 +40,7 @@ class WeatherCell: UITableViewCell {
     @IBOutlet weak var lblCurrentTemp: UILabel!
     @IBOutlet weak var lblMaxTemp: UILabel!
     @IBOutlet weak var lblMinTemp: UILabel!
-    @IBOutlet weak var lblUpdateTime: UILabel!
+    @IBOutlet weak var lblCityName: UILabel!
     
     
     override func awakeFromNib() {
@@ -60,7 +60,7 @@ class WeatherCell: UITableViewCell {
                                              cornerRadius: self.containerView.layer.cornerRadius).cgPath
     }
     
-    private func loadWeatherIconBy(state: String) {
+    private func loadWeatherIconBy(iconCode: String) {
         if let stateAbbr = weather?.stateAbbr {
             switch stateAbbr {
             case WeatherState.snow.rawValue:
@@ -98,7 +98,7 @@ class WeatherCell: UITableViewCell {
             let currentTimeZone = TimeZone(secondsFromGMT: 0)
             dateFormatter.timeZone = currentTimeZone
             dateFormatter.dateFormat = "HH:mm"
-            lblUpdateTime.text = "\(String.stringByKey(key: .cellTimeLabel)) \(dateFormatter.string(from: newDate))"
+            lblCityName.text = "\(String.stringByKey(key: .cellTimeLabel)) \(dateFormatter.string(from: newDate))"
         }
     }
     

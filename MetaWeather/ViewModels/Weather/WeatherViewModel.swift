@@ -9,7 +9,7 @@ import Foundation
 
 final class WeatherViewModel {
     
-    var currentWoeid = Constants.woeId
+    var currentCoordinate: (Float, Float) = Constants.hcmCoordinate
     
     var isNetworkBack = true
     
@@ -48,6 +48,9 @@ final class WeatherViewModel {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy/MM/dd"
             let today = dateFormatter.string(from: Date())
+            /**
+             https://api.openweathermap.org/data/2.5/weather?lat=10.7758439&lon=106.7017555&appid=bb587f64faaba88b43cc87e8141cc000&units=metric
+             */
             let strUrl = Constants.apiRootPath + Constants.apiLocation + currentWoeid + "/" + today
             
             apiManager.getRequest(url: strUrl, params: [:]) {[weak self] result in
@@ -77,7 +80,7 @@ final class WeatherViewModel {
         queue.waitUntilAllOperationsAreFinished()
     }
     
-    func findCityBy(keyword: String, completionHandler: @escaping([Location]) -> Void) {
+    func findCityBy(keyword: String, completionHandler: @escaping([Coordinate]) -> Void) {
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = 3
         
@@ -90,7 +93,7 @@ final class WeatherViewModel {
                 case .success(let data):
                     let jsonDecoder = JSONDecoder()
                     do {
-                        let locations = try jsonDecoder.decode([Location].self, from: data)
+                        let locations = try jsonDecoder.decode([Coordinate].self, from: data)
                         completionHandler(locations)
                     } catch {
                         print(error.localizedDescription)

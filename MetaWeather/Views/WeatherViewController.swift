@@ -138,7 +138,7 @@ extension WeatherViewController {
 }
 
 extension WeatherViewController: ResultViewControllerDelegate {
-    func finishChooseCity(woeid: String) {
+    func finishChooseCity(coordinate: (Float, Float)) {
         resetSearchUi()
         viewModel.currentWoeid = woeid
         LoadingView.shared.startLoadingVia(parentView: view)
