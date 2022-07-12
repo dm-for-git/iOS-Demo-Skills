@@ -2,7 +2,9 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>API_KEY</key>
+	<key>WEATHER_API_KEY</key>
+	<string>$(WEATHER_KEY)</string>
+	<key>PEXEL_API_KEY</key>
 	<string>$(PEXEL_TOKEN)</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>

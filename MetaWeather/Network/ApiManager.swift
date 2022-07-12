@@ -10,7 +10,16 @@ import Network
 
 
 class ApiManager: NSCopying {
-    private lazy var defaultSession: URLSession =  {
+    
+    // Prevent instance of this object to be cloned
+    func copy(with zone: NSZone? = nil) -> Any {
+        return self
+    }
+    
+    static let shared = ApiManager()
+    private var dataTask: URLSessionDataTask?
+    
+    private lazy var defaultSession: URLSession = {
         let config = URLSessionConfiguration.default
         config.waitsForConnectivity = true
         // Set timeout in second
@@ -21,13 +30,6 @@ class ApiManager: NSCopying {
         
         return session
     }()
-    private var dataTask: URLSessionDataTask?
-    static let shared = ApiManager()
-    
-    // Prevent instance of this object to be cloned
-    func copy(with zone: NSZone? = nil) -> Any {
-        return self
-    }
     
     // MARK: GET
     func getRequest(url: String, withBearer: Bool? = false, params: [String: String],
@@ -45,7 +47,7 @@ class ApiManager: NSCopying {
             var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData)
             request.httpMethod = "GET"
             if let isUsingBearer = withBearer, isUsingBearer == true {
-                let bearer = "Bearer \(videoServiceToken())"
+                let bearer = "Bearer \(videoServiceToken)"
                 request.setValue(bearer, forHTTPHeaderField: "Authorization")
             }
             
@@ -119,11 +121,19 @@ class ApiManager: NSCopying {
         return result
     }
     
-    private func videoServiceToken() -> String {
+    private var videoServiceToken: String {
         if let apiKey = Bundle.main.infoDictionary?[Constants.videoServiceToken] as? String {
             return apiKey
         }
+        print("\n Video Service Token is missing \n")
         return ""
     }
     
+    static var weatherServiceApiKey: String {
+        if let apiKey = Bundle.main.infoDictionary?[Constants.weatherApiKey] as? String {
+            return apiKey
+        }
+        print("\n Weather Service Token is missing \n")
+        return ""
+    }
 }

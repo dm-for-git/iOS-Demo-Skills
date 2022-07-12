@@ -26,7 +26,7 @@ class ResultViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: kCellIdentifier, for: indexPath)
-        cell.textLabel?.text = viewModel.arrLocations[indexPath.row].cityName
+        cell.textLabel?.text = viewModel.arrLocations[indexPath.row].name
         
         return cell
     }

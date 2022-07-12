@@ -7,16 +7,7 @@
 
 import Foundation
 
-/**
- * To get weather status icon by weather status code
- https://openweathermap.org/img/wn/03n@2x.png
- */
-/**
- 
- */
-
-
-struct Weather: Decodable {
+struct Weather: Decodable, Hashable {
     var currentTemp: Float?
     var maxTemp: Float?
     var minTemp: Float?
@@ -29,8 +20,6 @@ struct Weather: Decodable {
         case maxTemp = "temp_max"
         case minTemp = "temp_min"
         case cityName = "name"
-        case status = "description"
-        case iconCode = "icon"
         // Middleman keys
         case main
         case weather
@@ -48,14 +37,31 @@ struct Weather: Decodable {
         maxTemp = try mainContainer.decodeIfPresent(Float.self, forKey: .maxTemp)
         minTemp = try mainContainer.decodeIfPresent(Float.self, forKey: .minTemp)
         
-        
-        let weatherContainer = try values.nestedContainer(keyedBy: CodingKeys.self, forKey: .weather)
-        status = try weatherContainer.decodeIfPresent(String.self, forKey: .status)
-        iconCode = try weatherContainer.decodeIfPresent(String.self, forKey: .iconCode)
+        let innerWeather = try values.decodeIfPresent([InnerWeather].self, forKey: .weather)
+        if let innerWeather = innerWeather?.first {
+            status = innerWeather.innerStatus
+            iconCode = innerWeather.innerIconCode
+        }
     }
     
     init() {
         
+    }
+    
+    private struct InnerWeather: Decodable {
+        let innerStatus: String
+        let innerIconCode: String
+        
+        private enum InnerCodingKeys: String, CodingKey {
+            case innerStatus = "description"
+            case innerIconCode = "icon"
+        }
+        
+        init(from decoder: Decoder) throws {
+            let values = try decoder.container(keyedBy: InnerCodingKeys.self)
+            innerStatus = try values.decodeIfPresent(String.self, forKey: .innerStatus) ?? ""
+            innerIconCode = try values.decodeIfPresent(String.self, forKey: .innerIconCode) ?? ""
+        }
     }
     
 }

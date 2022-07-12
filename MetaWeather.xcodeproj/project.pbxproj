@@ -36,6 +36,7 @@
 		D50065BC2822C79300F0AD8F /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = D50065BB2822C79300F0AD8F /* Lottie */; };
 		D53F6DBC28649EC4009F4D1E /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53F6DBB28649EC4009F4D1E /* Coordinate.swift */; };
 		D54EE70428202B9100B0777B /* UIDevice+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54EE70328202B9100B0777B /* UIDevice+.swift */; };
+		D5997C51287DDF100090D635 /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5997C50287DDF100090D635 /* Array+.swift */; };
 		D5C61F942871D017003A7ADA /* coordinate.json in Resources */ = {isa = PBXBuildFile; fileRef = D5C61F932871D017003A7ADA /* coordinate.json */; };
 		D5C61F962871D076003A7ADA /* CoordinateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C61F952871D076003A7ADA /* CoordinateTest.swift */; };
 		FA0BEE4526E4C8D8002D9B34 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0BEE4426E4C8D8002D9B34 /* UIViewController+.swift */; };
@@ -122,6 +123,7 @@
 		BAF7D80227CA1F4D0049A7BC /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		D53F6DBB28649EC4009F4D1E /* Coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
 		D54EE70328202B9100B0777B /* UIDevice+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+.swift"; sourceTree = "<group>"; };
+		D5997C50287DDF100090D635 /* Array+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
 		D5C61F932871D017003A7ADA /* coordinate.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = coordinate.json; sourceTree = "<group>"; };
 		D5C61F952871D076003A7ADA /* CoordinateTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateTest.swift; sourceTree = "<group>"; };
 		FA0BEE4426E4C8D8002D9B34 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
@@ -253,6 +255,7 @@
 				FA0BEE4426E4C8D8002D9B34 /* UIViewController+.swift */,
 				BA9481A3279FDE4100851B6F /* String+.swift */,
 				BACA6EA327CC89920054EF5C /* View+.swift */,
+				D5997C50287DDF100090D635 /* Array+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -594,6 +597,7 @@
 				D54EE70428202B9100B0777B /* UIDevice+.swift in Sources */,
 				BA9481A4279FDE4100851B6F /* String+.swift in Sources */,
 				FACF1D5C26C664FF00270776 /* VideoFile.swift in Sources */,
+				D5997C51287DDF100090D635 /* Array+.swift in Sources */,
 				FACF1D5326C6248100270776 /* VideoFooterView.swift in Sources */,
 				FACF1D5E26C664FF00270776 /* Video.swift in Sources */,
 				BA9F091E27D06D2C00368803 /* TextView.swift in Sources */,
