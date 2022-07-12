@@ -8,7 +8,7 @@
 import UIKit
 
 protocol ResultViewControllerDelegate: AnyObject {
-    func finishChooseCity(woeid: String)
+    func finishChooseCity(coordinate: (Float, Float))
 }
 
 class ResultViewController: UITableViewController {
@@ -26,14 +26,14 @@ class ResultViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: kCellIdentifier, for: indexPath)
-        cell.textLabel?.text = viewModel.arrLocations[indexPath.row].title
+        cell.textLabel?.text = viewModel.arrLocations[indexPath.row].name
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedWoeid = viewModel.arrLocations[indexPath.row].woeid
-        delegate?.finishChooseCity(woeid: "\(selectedWoeid)")
+        let selectedCoordinate: (Float, Float) = (viewModel.arrLocations[indexPath.row].latitude, viewModel.arrLocations[indexPath.row].longitude)
+        delegate?.finishChooseCity(coordinate: selectedCoordinate)
         navigationController?.popViewController(animated: false)
     }
 }

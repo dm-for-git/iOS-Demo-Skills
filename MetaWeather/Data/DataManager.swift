@@ -33,9 +33,9 @@ class DataManager: NSCopying {
                 weatherEntity.currentTemp = weather.currentTemp ?? 0
                 weatherEntity.maxTemp = weather.maxTemp ?? 0
                 weatherEntity.minTemp = weather.minTemp ?? 0
-                weatherEntity.lastUpdate = weather.lastUpdated
-                weatherEntity.stateAbbr = weather.stateAbbr
-                weatherEntity.stateName = weather.stateName
+                weatherEntity.weatherStatus = weather.status
+                weatherEntity.cityName = weather.cityName
+                weatherEntity.iconCode = weather.iconCode
                 
                 do {
                     try context.save()
@@ -68,13 +68,12 @@ class DataManager: NSCopying {
                         var weathers = [Weather]()
                         weatherEntities.forEach { item in
                             var weather = Weather()
-                            weather.lastUpdated = item.lastUpdate
                             weather.currentTemp = item.currentTemp
                             weather.maxTemp = item.maxTemp
                             weather.minTemp = item.minTemp
-                            weather.stateName = item.stateName
-                            weather.stateAbbr = item.stateAbbr
-                            
+                            weather.cityName = item.cityName
+                            weather.status = item.weatherStatus
+                            weather.iconCode = item.iconCode
                             weathers.append(weather)
                         }
                         handler(.success(weathers))
@@ -91,7 +90,7 @@ class DataManager: NSCopying {
         }
     }
     
-    func deleteAllData(handler: @escaping(Result<Bool, CustomError>) -> Void) {
+    func deleteAllData(entityName: String, handler: @escaping(Result<Bool, CustomError>) -> Void) {
         DispatchQueue.main.async {
             guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
                 handler(.failure(.unknownError))
@@ -104,7 +103,7 @@ class DataManager: NSCopying {
                 
                 let context = appDelegate.persistentContainer.viewContext
                 
-                let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "WeatherEntity")
+                let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
                 
                 // Create Batch Delete Request
                 let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)

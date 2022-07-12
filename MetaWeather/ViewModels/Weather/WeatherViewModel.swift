@@ -9,7 +9,7 @@ import Foundation
 
 final class WeatherViewModel {
     
-    var currentWoeid = Constants.woeId
+    var currentCoordinate: (Float, Float) = Constants.hcmCoordinate
     
     var isNetworkBack = true
     
@@ -45,20 +45,17 @@ final class WeatherViewModel {
         
         queue.addOperation {[unowned self] in
             let apiManager = ApiManager.shared
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy/MM/dd"
-            let today = dateFormatter.string(from: Date())
-            let strUrl = Constants.apiRootPath + Constants.apiLocation + currentWoeid + "/" + today
+            let strUrl = Constants.apiRootPath + Constants.apiWeather
+            let params: [String: String] = ["lat": "\(currentCoordinate.0)", "lon": "\(currentCoordinate.1)",
+                                            "units": "metric", "appid": ApiManager.weatherServiceApiKey]
             
-            apiManager.getRequest(url: strUrl, params: [:]) {[weak self] result in
+            apiManager.getRequest(url: strUrl, params: params) {[weak self] result in
                 switch result {
                 case .success(let data):
                     let jsonDecoder = JSONDecoder()
                     do {
-                        let weathers = try jsonDecoder.decode([Weather].self, from: data)
-                        self?.filterDateData(weathers: weathers, handler: { isSucess in
-                            completionHandler(isSucess)
-                        })
+                        let weathers = try jsonDecoder.decode(Weather.self, from: data)
+                        self?.filterData(newWeather: [weathers], handler: completionHandler)
                     } catch {
                         print(error.localizedDescription)
                         self?.loadLocalData { result in
@@ -77,20 +74,21 @@ final class WeatherViewModel {
         queue.waitUntilAllOperationsAreFinished()
     }
     
-    func findCityBy(keyword: String, completionHandler: @escaping([Location]) -> Void) {
+    func findCityBy(keyword: String, completionHandler: @escaping([Coordinate]) -> Void) {
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = 3
         
         queue.addOperation {
             let apiManager = ApiManager.shared
-            let strUrl = Constants.apiRootPath + Constants.apiLocation + Constants.apiSearch
-            let params = ["query" : keyword]
+            // https://api.openweathermap.org/geo/1.0/direct?q=Toronto&limit=1&appid=bb587f64faaba88b43cc87e8141cc000
+            let strUrl = Constants.apiRootPath + Constants.apiLocation
+            let params = ["q": keyword, "limit": "1", "appid": ApiManager.weatherServiceApiKey]
             apiManager.getRequest(url: strUrl, params: params) { result in
                 switch result {
                 case .success(let data):
                     let jsonDecoder = JSONDecoder()
                     do {
-                        let locations = try jsonDecoder.decode([Location].self, from: data)
+                        let locations = try jsonDecoder.decode([Coordinate].self, from: data)
                         completionHandler(locations)
                     } catch {
                         print(error.localizedDescription)
@@ -105,21 +103,18 @@ final class WeatherViewModel {
     }
     
     // MARK: Filter Data
-    private func filterDateData(weathers: [Weather], handler: @escaping(Bool) -> Void) {
+    private func filterData(newWeather: [Weather], handler: @escaping(Bool) -> Void) {
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = 3
-        
+
         queue.addOperation {[weak self] in
-            // "2021-08-06T23:59:58.252053Z"
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd"
-            let strToday = dateFormatter.string(from: Date()) + "T"
             queue.addOperation {
-                self?.arrWeather = weathers.filter {
-                    $0.lastUpdated?.contains(strToday) ?? false
+                let newCityName = newWeather.first?.cityName ?? ""
+                let sameCityName = self?.arrWeather.filter { $0.cityName == newCityName } ?? []
+                if sameCityName.isEmpty {
+                    self?.arrWeather.append(contentsOf: newWeather)
                 }
             }
-            
         }
         queue.waitUntilAllOperationsAreFinished()
         if !arrWeather.isEmpty {
@@ -132,12 +127,14 @@ final class WeatherViewModel {
     
     // MARK: Insert Data
     private func insertAllData(filteredWeather: [Weather]){
+        guard !filteredWeather.isEmpty else { return }
+        
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = 3
         
         queue.addOperation {
             let dataManager = DataManager.shared
-            dataManager.deleteAllData { result in
+            dataManager.deleteAllData(entityName: "WeatherEntity") { result in
                 filteredWeather.forEach { weather in
                     dataManager.insertWeather(weather: weather) { result in
                         switch result {

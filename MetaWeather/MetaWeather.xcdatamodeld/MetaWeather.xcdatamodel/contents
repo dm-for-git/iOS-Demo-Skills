@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20F71" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21F79" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="WeatherEntity" representedClassName="WeatherEntity" syncable="YES" codeGenerationType="category">
+        <attribute name="cityName" optional="YES" attributeType="String"/>
         <attribute name="currentTemp" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="lastUpdate" optional="YES" attributeType="String"/>
+        <attribute name="iconCode" optional="YES" attributeType="String"/>
         <attribute name="maxTemp" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="minTemp" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="stateAbbr" optional="YES" attributeType="String"/>
-        <attribute name="stateName" optional="YES" attributeType="String"/>
+        <attribute name="weatherStatus" optional="YES" attributeType="String"/>
     </entity>
     <elements>
         <element name="WeatherEntity" positionX="-63" positionY="-18" width="128" height="119"/>

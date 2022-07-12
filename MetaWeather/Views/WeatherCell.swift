@@ -11,8 +11,9 @@ class WeatherCell: UITableViewCell {
     
     var weather: Weather? {
         didSet {
-            loadWeatherIconBy(state: weather?.stateAbbr ?? "")
-            lblWeatherState.text = weather?.stateName
+            loadWeatherIconBy(iconCode: weather?.iconCode ?? "")
+            
+            lblWeatherState.text = (weather?.status ?? "").capitalized
             
             let currentTemp = NSString(format:"\(Int(weather?.currentTemp ?? 0))%@C" as NSString, "\u{00B0}") as String
             lblCurrentTemp.text = currentTemp
@@ -23,7 +24,7 @@ class WeatherCell: UITableViewCell {
             let minTemp = NSString(format:"L: \(Int(weather?.minTemp ?? 0))%@C" as NSString, "\u{00B0}") as String
             lblMinTemp.text = minTemp
             
-            setUpdateTimeBy(timeString: weather?.lastUpdated ?? "")
+            lblCityName.text = weather?.cityName ?? "Unavailable"
         }
     }
     
@@ -35,12 +36,12 @@ class WeatherCell: UITableViewCell {
     
     
     @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var imgWeatherState: UIImageView!
+    @IBOutlet weak var imgWeatherState: ImageViewLoader!
     @IBOutlet weak var lblWeatherState: UILabel!
     @IBOutlet weak var lblCurrentTemp: UILabel!
     @IBOutlet weak var lblMaxTemp: UILabel!
     @IBOutlet weak var lblMinTemp: UILabel!
-    @IBOutlet weak var lblUpdateTime: UILabel!
+    @IBOutlet weak var lblCityName: UILabel!
     
     
     override func awakeFromNib() {
@@ -60,33 +61,14 @@ class WeatherCell: UITableViewCell {
                                              cornerRadius: self.containerView.layer.cornerRadius).cgPath
     }
     
-    private func loadWeatherIconBy(state: String) {
-        if let stateAbbr = weather?.stateAbbr {
-            switch stateAbbr {
-            case WeatherState.snow.rawValue:
-                imgWeatherState.image = UIImage(named: "snow")
-            case WeatherState.sleet.rawValue:
-                imgWeatherState.image = UIImage(named: "sleet")
-            case WeatherState.hail.rawValue:
-                imgWeatherState.image = UIImage(named: "hail")
-            case WeatherState.thunderstorm.rawValue:
-                imgWeatherState.image = UIImage(named: "thunderstorm")
-            case WeatherState.heavyrain.rawValue:
-                imgWeatherState.image = UIImage(named: "heavyrain")
-            case WeatherState.lightrain.rawValue:
-                imgWeatherState.image = UIImage(named: "lightrain")
-            case WeatherState.showers.rawValue:
-                imgWeatherState.image = UIImage(named: "showers")
-            case WeatherState.heavycloud.rawValue:
-                imgWeatherState.image = UIImage(named: "heavycloud")
-            case WeatherState.lightcloud.rawValue:
-                imgWeatherState.image = UIImage(named: "lightcloud")
-            case WeatherState.clear.rawValue:
-                imgWeatherState.image = UIImage(named: "clear")
-            default:
-                imgWeatherState.image = UIImage(named: "placeholder")
-            }
-        }
+    private func loadWeatherIconBy(iconCode: String) {
+        /**
+         * To get weather status icon by weather status code
+         https://openweathermap.org/img/wn/<icon code goes here>@2x.png
+         */
+        guard iconCode != ""  else { return }
+        let iconUrl = Constants.apiIcon + iconCode + "@2x.png"
+        imgWeatherState.load(strUrl: iconUrl)
     }
     
     private func setUpdateTimeBy(timeString: String) {
@@ -98,21 +80,8 @@ class WeatherCell: UITableViewCell {
             let currentTimeZone = TimeZone(secondsFromGMT: 0)
             dateFormatter.timeZone = currentTimeZone
             dateFormatter.dateFormat = "HH:mm"
-            lblUpdateTime.text = "\(String.stringByKey(key: .cellTimeLabel)) \(dateFormatter.string(from: newDate))"
+            lblCityName.text = "\(String.stringByKey(key: .cellTimeLabel)) \(dateFormatter.string(from: newDate))"
         }
     }
     
-}
-
-enum WeatherState: String {
-    case snow = "sn"
-    case sleet = "sl"
-    case hail = "h"
-    case thunderstorm = "t"
-    case heavyrain = "hr"
-    case lightrain = "lr"
-    case showers = "s"
-    case heavycloud = "hc"
-    case lightcloud = "lc"
-    case clear = "c"
 }

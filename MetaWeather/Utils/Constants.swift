@@ -14,14 +14,19 @@ enum Constants {
     static let navigationBarHeight: CGFloat = 44
     
     // MARK: Video
-    static let videoServiceToken = "API_KEY"
+    static let videoServiceToken = "PEXEL_API_KEY"
     static let apiGetVideo = "https://api.pexels.com/videos/popular"
   
     // MARK: Weather
-    static let woeId = "1252431" // Ho Chi Minh city
-    static let apiRootPath = "https://www.metaweather.com/api"
-    static let apiLocation = "/location/"
-    static let apiSearch = "search/"
+    static let weatherApiKey = "WEATHER_API_KEY"
+    // Ho Chi Minh city's coordinate
+    static let hcmCoordinate: (Float, Float) = (10.7758439, 106.7017555)
+    
+    static let apiRootPath = "https://api.openweathermap.org/"
+    static let apiWeather = "data/2.5/weather"
+    static let apiLocation = "geo/1.0/direct"
+    
+    static let apiIcon = "https://openweathermap.org/img/wn/"
     
     // MARK: News
     static let newsPath = "https://vnexpress.net/rss/suc-khoe.rss"

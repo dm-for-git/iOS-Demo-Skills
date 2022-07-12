@@ -18,4 +18,6 @@
 
 // For testing only, NEVER put production token here, you MUST encrypt your token
 // You can request one here https://www.pexels.com/api/new/
-PEXEL_TOKEN = ""
+PEXEL_TOKEN =
+// You can request one here https://api.openweathermap.org
+WEATHER_KEY = 
