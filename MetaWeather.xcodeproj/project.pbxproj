@@ -36,6 +36,12 @@
 		D50065BC2822C79300F0AD8F /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = D50065BB2822C79300F0AD8F /* Lottie */; };
 		D53F6DBC28649EC4009F4D1E /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53F6DBB28649EC4009F4D1E /* Coordinate.swift */; };
 		D54EE70428202B9100B0777B /* UIDevice+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54EE70328202B9100B0777B /* UIDevice+.swift */; };
+		D583110228806FE000274831 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D583110128806FE000274831 /* NotificationManager.swift */; };
+		D58311042880761600274831 /* Data+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58311032880761600274831 /* Data+.swift */; };
+		D583110C28807EC900274831 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D583110B28807EC900274831 /* NotificationService.swift */; };
+		D583111028807EC900274831 /* MetaNotificationService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D583110928807EC900274831 /* MetaNotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D583111628807F5900274831 /* PhotoDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D583111528807F5900274831 /* PhotoDownloader.swift */; };
+		D5831117288083E500274831 /* PhotoDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D583111528807F5900274831 /* PhotoDownloader.swift */; };
 		D5997C51287DDF100090D635 /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5997C50287DDF100090D635 /* Array+.swift */; };
 		D5C61F942871D017003A7ADA /* coordinate.json in Resources */ = {isa = PBXBuildFile; fileRef = D5C61F932871D017003A7ADA /* coordinate.json */; };
 		D5C61F962871D076003A7ADA /* CoordinateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C61F952871D076003A7ADA /* CoordinateTest.swift */; };
@@ -82,6 +88,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		D583110E28807EC900274831 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FA8644D326BD64F100973985 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D583110828807EC900274831;
+			remoteInfo = MetaNotificationService;
+		};
 		FA8644F526BD64F300973985 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FA8644D326BD64F100973985 /* Project object */;
@@ -90,6 +103,20 @@
 			remoteInfo = MetaWeather;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D583111428807EC900274831 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				D583111028807EC900274831 /* MetaNotificationService.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		BA2A8FF427CF53F500F73958 /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
@@ -123,6 +150,13 @@
 		BAF7D80227CA1F4D0049A7BC /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		D53F6DBB28649EC4009F4D1E /* Coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
 		D54EE70328202B9100B0777B /* UIDevice+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+.swift"; sourceTree = "<group>"; };
+		D58310FF28806EFC00274831 /* MetaWeather.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MetaWeather.entitlements; sourceTree = "<group>"; };
+		D583110128806FE000274831 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		D58311032880761600274831 /* Data+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+.swift"; sourceTree = "<group>"; };
+		D583110928807EC900274831 /* MetaNotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MetaNotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		D583110B28807EC900274831 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		D583110D28807EC900274831 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D583111528807F5900274831 /* PhotoDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDownloader.swift; sourceTree = "<group>"; };
 		D5997C50287DDF100090D635 /* Array+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
 		D5C61F932871D017003A7ADA /* coordinate.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = coordinate.json; sourceTree = "<group>"; };
 		D5C61F952871D076003A7ADA /* CoordinateTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateTest.swift; sourceTree = "<group>"; };
@@ -174,6 +208,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D583110628807EC900274831 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FA8644D826BD64F100973985 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -245,6 +286,23 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		D583110028806FC400274831 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				D583110128806FE000274831 /* NotificationManager.swift */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
+		D583110A28807EC900274831 /* MetaNotificationService */ = {
+			isa = PBXGroup;
+			children = (
+				D583110B28807EC900274831 /* NotificationService.swift */,
+				D583110D28807EC900274831 /* Info.plist */,
+			);
+			path = MetaNotificationService;
+			sourceTree = "<group>";
+		};
 		FA0BEE4326E4C8B4002D9B34 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -256,6 +314,7 @@
 				BA9481A3279FDE4100851B6F /* String+.swift */,
 				BACA6EA327CC89920054EF5C /* View+.swift */,
 				D5997C50287DDF100090D635 /* Array+.swift */,
+				D58311032880761600274831 /* Data+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -269,6 +328,7 @@
 				FACF1D4E26C6219800270776 /* ImageViewLoader.swift */,
 				BA4526B4279FB65300A785AA /* Localizable.strings */,
 				BA9481A1279FDD5300851B6F /* LocalizableKeys.swift */,
+				D583111528807F5900274831 /* PhotoDownloader.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -294,6 +354,7 @@
 			children = (
 				FA8644DD26BD64F100973985 /* MetaWeather */,
 				FA8644F726BD64F300973985 /* MetaWeatherTests */,
+				D583110A28807EC900274831 /* MetaNotificationService */,
 				FA8644DC26BD64F100973985 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -303,6 +364,7 @@
 			children = (
 				FA8644DB26BD64F100973985 /* MetaWeather.app */,
 				FA8644F426BD64F300973985 /* MetaWeatherTests.xctest */,
+				D583110928807EC900274831 /* MetaNotificationService.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -310,6 +372,8 @@
 		FA8644DD26BD64F100973985 /* MetaWeather */ = {
 			isa = PBXGroup;
 			children = (
+				D583110028806FC400274831 /* Notification */,
+				D58310FF28806EFC00274831 /* MetaWeather.entitlements */,
 				BACA6EA027CC893E0054EF5C /* CustomViews */,
 				BAF7D7F727CA0AF20049A7BC /* Resources */,
 				FA0BEE4326E4C8B4002D9B34 /* Extensions */,
@@ -469,6 +533,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		D583110828807EC900274831 /* MetaNotificationService */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D583111128807EC900274831 /* Build configuration list for PBXNativeTarget "MetaNotificationService" */;
+			buildPhases = (
+				D583110528807EC900274831 /* Sources */,
+				D583110628807EC900274831 /* Frameworks */,
+				D583110728807EC900274831 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MetaNotificationService;
+			productName = MetaNotificationService;
+			productReference = D583110928807EC900274831 /* MetaNotificationService.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		FA8644DA26BD64F100973985 /* MetaWeather */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = FA86450826BD64F300973985 /* Build configuration list for PBXNativeTarget "MetaWeather" */;
@@ -476,10 +557,12 @@
 				FA8644D726BD64F100973985 /* Sources */,
 				FA8644D826BD64F100973985 /* Frameworks */,
 				FA8644D926BD64F100973985 /* Resources */,
+				D583111428807EC900274831 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				D583110F28807EC900274831 /* PBXTargetDependency */,
 			);
 			name = MetaWeather;
 			packageProductDependencies = (
@@ -514,9 +597,12 @@
 		FA8644D326BD64F100973985 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1250;
+				LastSwiftUpdateCheck = 1330;
 				LastUpgradeCheck = 1330;
 				TargetAttributes = {
+					D583110828807EC900274831 = {
+						CreatedOnToolsVersion = 13.3.1;
+					};
 					FA8644DA26BD64F100973985 = {
 						CreatedOnToolsVersion = 12.5;
 					};
@@ -546,11 +632,19 @@
 			targets = (
 				FA8644DA26BD64F100973985 /* MetaWeather */,
 				FA8644F326BD64F300973985 /* MetaWeatherTests */,
+				D583110828807EC900274831 /* MetaNotificationService */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		D583110728807EC900274831 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FA8644D926BD64F100973985 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -580,6 +674,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D583110528807EC900274831 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D583110C28807EC900274831 /* NotificationService.swift in Sources */,
+				D5831117288083E500274831 /* PhotoDownloader.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FA8644D726BD64F100973985 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -590,6 +693,7 @@
 				BA7ECF7827CF446200DF1D8F /* NewsListItemView.swift in Sources */,
 				FACF1D4D26C620EB00270776 /* VideoCell.swift in Sources */,
 				BA7ECF7427CF2A5C00DF1D8F /* NewsListView.swift in Sources */,
+				D583110228806FE000274831 /* NotificationManager.swift in Sources */,
 				BA2A8FF527CF53F500F73958 /* CircleImage.swift in Sources */,
 				FA147E9126BD96C0007694FE /* DataManager.swift in Sources */,
 				FA8644E126BD64F100973985 /* SceneDelegate.swift in Sources */,
@@ -606,6 +710,7 @@
 				BACA6EC227CCD8180054EF5C /* HeaderView.swift in Sources */,
 				BAB70F8727980E1B0040660C /* ResultViewController.swift in Sources */,
 				FA0F32E726BEDA2E002FC96D /* NotificationName+.swift in Sources */,
+				D58311042880761600274831 /* Data+.swift in Sources */,
 				BA4526A9279FB11400A785AA /* WeatherViewController+UISearchResultUpdater.swift in Sources */,
 				BACE9A0827C8AF9B007D28DF /* NewsView.swift in Sources */,
 				BAF7D80327CA1F4D0049A7BC /* LoadingView.swift in Sources */,
@@ -625,6 +730,7 @@
 				BA7ECF7627CF2FCF00DF1D8F /* FavoriteButton.swift in Sources */,
 				FA8644E926BD64F100973985 /* MetaWeather.xcdatamodeld in Sources */,
 				FA86451926BD71AE00973985 /* WeatherViewController.swift in Sources */,
+				D583111628807F5900274831 /* PhotoDownloader.swift in Sources */,
 				FACF1D5F26C664FF00270776 /* VideoPicture.swift in Sources */,
 				FA9F1BED26E332760059528A /* UIView+.swift in Sources */,
 				BA9481A2279FDD5300851B6F /* LocalizableKeys.swift in Sources */,
@@ -655,6 +761,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		D583110F28807EC900274831 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D583110828807EC900274831 /* MetaNotificationService */;
+			targetProxy = D583110E28807EC900274831 /* PBXContainerItemProxy */;
+		};
 		FA8644F626BD64F300973985 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = FA8644DA26BD64F100973985 /* MetaWeather */;
@@ -694,6 +805,64 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		D583111228807EC900274831 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N7RU9Y475K;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MetaNotificationService/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MetaNotificationService;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = baodng.test.DemoSkill.MetaNotificationService;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		D583111328807EC900274831 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N7RU9Y475K;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MetaNotificationService/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MetaNotificationService;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = baodng.test.DemoSkill.MetaNotificationService;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
 		FA86450626BD64F300973985 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FA5DB1BC26C7F5120095D264 /* Configs.xcconfig */;
@@ -817,8 +986,10 @@
 		FA86450926BD64F300973985 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MetaWeather/MetaWeather.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N7RU9Y475K;
@@ -840,8 +1011,10 @@
 		FA86450A26BD64F300973985 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MetaWeather/MetaWeather.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N7RU9Y475K;
@@ -915,6 +1088,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D583111128807EC900274831 /* Build configuration list for PBXNativeTarget "MetaNotificationService" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D583111228807EC900274831 /* Debug */,
+				D583111328807EC900274831 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		FA8644D626BD64F100973985 /* Build configuration list for PBXProject "MetaWeather" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
