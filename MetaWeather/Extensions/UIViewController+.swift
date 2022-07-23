@@ -10,16 +10,6 @@ import SwiftUI
 
 extension UIViewController {
     
-    @objc private func forceDismissKeyboard() {
-        view.endEditing(true)
-    }
-    
-    func dismissKeyboard() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(forceDismissKeyboard))
-        tapGesture.cancelsTouchesInView = false
-        view.addGestureRecognizer(tapGesture)
-    }
-    
     /// Add a SwiftUI `View` as a child of the input `UIView`.
         /// - Parameters:
         ///   - swiftUIView: The SwiftUI `View` to add as a child.

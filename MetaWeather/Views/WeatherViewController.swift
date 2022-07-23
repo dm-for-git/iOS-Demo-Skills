@@ -31,6 +31,7 @@ class WeatherViewController: UITableViewController {
         super.viewDidLoad()
         // Setup network listener
         NotificationCenter.default.addObserver(self, selector: #selector(networkSubscriber), name: .networkStatus, object: nil)
+        setupKeyboardObserver()
         initData()
     }
     
@@ -126,6 +127,18 @@ class WeatherViewController: UITableViewController {
         }
     }
     
+    // MARK: Utils
+    private func setupKeyboardObserver() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.numberOfTapsRequired = 1
+        tapGesture.numberOfTouchesRequired = 1
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func dismissKeyboard() {
+        searchVC.searchBar.endEditing(true)
+    }
+    
 }
 
 // MARK: - Table view data source & delegate
@@ -161,3 +174,4 @@ extension WeatherViewController: ResultViewControllerDelegate {
         //        self.dismiss(animated: false)
     }
 }
+
