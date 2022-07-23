@@ -8,7 +8,6 @@
 import UIKit
 
 extension WeatherViewController: UISearchBarDelegate {
-    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let keywords = searchBar.searchTextField.text else { return }
         LoadingView.shared.startLoadingVia(parentView: self.view)

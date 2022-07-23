@@ -7,10 +7,12 @@
 
 import UIKit
 
-extension WeatherViewController: UISearchResultsUpdating {
+extension WeatherViewController: UISearchResultsUpdating, UISearchControllerDelegate {
     
     func updateSearchResults(for searchController: UISearchController) {
         // Do nothing here to prevent start searching whenever users're typing
     }
+    
+    
     
 }
