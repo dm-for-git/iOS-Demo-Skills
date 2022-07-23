@@ -42,6 +42,7 @@
 		D583111028807EC900274831 /* MetaNotificationService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D583110928807EC900274831 /* MetaNotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D583111628807F5900274831 /* PhotoDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D583111528807F5900274831 /* PhotoDownloader.swift */; };
 		D5831117288083E500274831 /* PhotoDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D583111528807F5900274831 /* PhotoDownloader.swift */; };
+		D5976E2E288726AB000125C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA8644EA26BD64F200973985 /* Assets.xcassets */; };
 		D5997C51287DDF100090D635 /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5997C50287DDF100090D635 /* Array+.swift */; };
 		D5C61F942871D017003A7ADA /* coordinate.json in Resources */ = {isa = PBXBuildFile; fileRef = D5C61F932871D017003A7ADA /* coordinate.json */; };
 		D5C61F962871D076003A7ADA /* CoordinateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C61F952871D076003A7ADA /* CoordinateTest.swift */; };
@@ -642,6 +643,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5976E2E288726AB000125C4 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -807,10 +809,11 @@
 /* Begin XCBuildConfiguration section */
 		D583111228807EC900274831 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA5DB1BC26C7F5120095D264 /* Configs.xcconfig */;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N7RU9Y475K;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -826,7 +829,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = baodng.test.DemoSkill.MetaNotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "MetaNotificationService-Dev";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -836,10 +839,11 @@
 		};
 		D583111328807EC900274831 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA5DB1BC26C7F5120095D264 /* Configs.xcconfig */;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N7RU9Y475K;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -855,7 +859,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = baodng.test.DemoSkill.MetaNotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "MetaNotificationService-Dis";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -985,13 +989,14 @@
 		};
 		FA86450926BD64F300973985 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA5DB1BC26C7F5120095D264 /* Configs.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = MetaWeather/MetaWeather.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = N7RU9Y475K;
 				INFOPLIST_FILE = MetaWeather/Base/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1001,7 +1006,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = baodng.test.DemoSkill;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Demo-Skill-Development";
 				SWIFT_OPTIMIZE_OBJECT_LIFETIME = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1010,13 +1015,14 @@
 		};
 		FA86450A26BD64F300973985 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA5DB1BC26C7F5120095D264 /* Configs.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = MetaWeather/MetaWeather.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = N7RU9Y475K;
 				INFOPLIST_FILE = MetaWeather/Base/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1026,7 +1032,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = baodng.test.DemoSkill;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Demo-Skill-Distribution";
 				SWIFT_OPTIMIZE_OBJECT_LIFETIME = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1035,6 +1041,7 @@
 		};
 		FA86450C26BD64F300973985 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA5DB1BC26C7F5120095D264 /* Configs.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1061,6 +1068,7 @@
 		};
 		FA86450D26BD64F300973985 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA5DB1BC26C7F5120095D264 /* Configs.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";

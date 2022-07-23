@@ -8,9 +8,9 @@
 import UIKit
 import SwiftMessages
 
-class WeatherViewController: UITableViewController, UISearchControllerDelegate {
-   
-    private var searchVC: UISearchController!
+class WeatherViewController: UITableViewController {
+    
+    var searchVC: UISearchController!
     var resultVC: ResultViewController!
     
     private let cellIdentifier = String(describing: WeatherCell.self)
@@ -34,8 +34,7 @@ class WeatherViewController: UITableViewController, UISearchControllerDelegate {
         initData()
     }
     
-    private func initData() {
-        LoadingView.shared.startLoadingVia(parentView: view)
+    private func setupSearchViewController() {
         guard let resultVC = storyboard?.instantiateViewController(withIdentifier:
                                                                     String(describing: ResultViewController.self)) as? ResultViewController else { return }
         resultVC.delegate = self
@@ -43,11 +42,14 @@ class WeatherViewController: UITableViewController, UISearchControllerDelegate {
         
         searchVC = UISearchController(searchResultsController: resultVC)
         searchVC.delegate = self
+        if let osVersion = Float(UIDevice.current.systemVersion), osVersion < 15 {
+            searchVC.obscuresBackgroundDuringPresentation = false
+        }
         searchVC.searchResultsUpdater = self
         searchVC.automaticallyShowsCancelButton = false
         searchVC.searchBar.searchTextField.clearButtonMode = .never
         searchVC.searchBar.autocapitalizationType = .none
-        searchVC.searchBar.delegate = self // Monitor when the search button is tapped.
+        searchVC.searchBar.delegate = self // Observe when the search button is tapped.
         searchVC.searchBar.placeholder = String.stringByKey(key: .searchBarPlaceHolder)
         
         // Place the search bar in the navigation bar.
@@ -57,14 +59,21 @@ class WeatherViewController: UITableViewController, UISearchControllerDelegate {
         navigationItem.hidesSearchBarWhenScrolling = false
         
         /** Search presents a view controller by applying normal view controller presentation semantics.
-            This means that the presentation moves up the view controller hierarchy until it finds the root
-            view controller or one that defines a presentation context.
-        */
+         This means that the presentation moves up the view controller hierarchy until it finds the root
+         view controller or one that defines a presentation context.
+         */
         
         /** Specify that this view controller determines how the search controller is presented.
-            The search controller should be presented modally and match the physical size of this view controller.
-        */
+         The search controller should be presented modally and match the physical size of this view controller.
+         */
         definesPresentationContext = true
+    }
+    
+    private func initData() {
+        LoadingView.shared.startLoadingVia(parentView: view)
+        
+        // Setup search view controller
+        setupSearchViewController()
         
         // Setup table view
         setupTableView()
@@ -149,5 +158,6 @@ extension WeatherViewController: ResultViewControllerDelegate {
         searchVC.searchBar.endEditing(true)
         searchVC.searchBar.text = nil
         searchVC.searchBar.placeholder = String.stringByKey(key: .searchBarPlaceHolder)
+        //        self.dismiss(animated: false)
     }
 }

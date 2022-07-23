@@ -22,10 +22,9 @@ class NotificationService: UNNotificationServiceExtension {
             print("photo_link is existed")
             PhotoDownloader.shared.downloadPhotoFrom(photoUrl: photoLink) {[weak self] photo in
                 print("download photo successfully")
+               let identifier = ProcessInfo.processInfo.globallyUniqueString
                 
-                let identifier = "photoAttachment.png"
-                
-                if let fileUrl = self?.saveImageAttachment(image: photo, forIdentifier: identifier),
+                if let fileUrl = self?.saveImageAttachment(image: photo, forIdentifier: "\(identifier).png"),
                    let photoAttachment = try? UNNotificationAttachment(identifier: identifier, url: fileUrl) {
                     print("Photo Extension Is Created!!!")
                     bestAttemptContent.attachments = [photoAttachment]
@@ -48,7 +47,7 @@ class NotificationService: UNNotificationServiceExtension {
     private func saveImageAttachment(image: UIImage, forIdentifier identifier: String) -> URL? {
         let tempDirectory = URL(fileURLWithPath: NSTemporaryDirectory())
         let directoryPath = tempDirectory.appendingPathComponent(
-            ProcessInfo.processInfo.globallyUniqueString, isDirectory: true)
+            identifier, isDirectory: true)
         do {
             try FileManager.default.createDirectory(at: directoryPath, withIntermediateDirectories: true,
                                                     attributes: nil)

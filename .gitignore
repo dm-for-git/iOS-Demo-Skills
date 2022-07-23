@@ -7,7 +7,7 @@
 
 ## User settings
 xcuserdata/
-/Users/davidmartin/Documents/iOS-Demo-Skills/MetaWeather/Base/Configs.xcconfig
+
 
 ## compatibility with Xcode 8 and earlier (ignoring not required starting Xcode 9)
 *.xcscmblueprint
@@ -92,3 +92,4 @@ fastlane/test_output
 # https://github.com/johnno1962/injectionforxcode
 
 iOSInjectionProject/
+MetaWeather/Base/Configs.xcconfig

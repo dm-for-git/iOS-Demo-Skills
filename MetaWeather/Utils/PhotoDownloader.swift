@@ -29,15 +29,11 @@ class PhotoDownloader: NSCopying {
         if url != cachedImageUrl {
             DispatchQueue.global().async {
                 if let data = try? Data(contentsOf: url), let image = UIImage(data: data) {
-                    print("\n Download Photo Completed!!! \n")
                     completionHandler(image)
                 }
             }
         }
         cachedImageUrl = url
     }
-    
-    
-    
     
 }
