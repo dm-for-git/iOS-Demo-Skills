@@ -29,12 +29,17 @@ class VideoViewController: UICollectionViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(networkSubscriber),
                                                name: .networkStatus, object: nil)
         
+        setupUi()
+        setupData()
+    }
+    
+    private func setupUi() {
         playerViewController = AVPlayerViewController()
         playerViewController?.delegate = self
         
         // Setup pull to refresh
         refreshVC = UIRefreshControl()
-        refreshVC?.tintColor = .cyan
+        refreshVC?.tintColor = .systemPurple
         refreshVC?.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
         collectionView.refreshControl = refreshVC
         
@@ -50,6 +55,9 @@ class VideoViewController: UICollectionViewController {
         // Register for reusable cell
         collectionView.register(UINib(nibName: cellIdentifier, bundle: nil),
                                 forCellWithReuseIdentifier: cellIdentifier)
+    }
+    
+    private func setupData() {
         viewModel.fetchMoreData { [weak self] isSuccess in
             DispatchQueue.main.async {
                 if isSuccess {
@@ -61,8 +69,8 @@ class VideoViewController: UICollectionViewController {
             }
             LoadingView.shared.stopLoading()
         }
-        
     }
+    
     
     // MARK: Data Loading
     @objc private func refreshData(_ sender: Any) {

@@ -19,7 +19,7 @@
             </objects>
             <point key="canvasLocation" x="-119" y="-592"/>
         </scene>
-        <!--Video-->
+        <!--Video View Controller-->
         <scene sceneID="tKf-Uu-3XL">
             <objects>
                 <collectionViewController storyboardIdentifier="VideoViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Jts-zO-6x5" customClass="VideoViewController" customModule="MetaWeather" customModuleProvider="target" sceneMemberID="viewController">
@@ -39,13 +39,11 @@
                             <outlet property="delegate" destination="Jts-zO-6x5" id="wFV-ND-J0k"/>
                         </connections>
                     </collectionView>
-                    <tabBarItem key="tabBarItem" title="Video" image="tab_video_item" id="4d6-u8-Ajo">
-                        <color key="badgeColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </tabBarItem>
+                    <navigationItem key="navigationItem" id="O5R-Ca-Twu"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vpk-TO-9JS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-131" y="125"/>
+            <point key="canvasLocation" x="769" y="125"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="kBg-7j-Ue6">
@@ -61,7 +59,7 @@
                         <color key="selectedImageTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="Jts-zO-6x5" kind="relationship" relationship="viewControllers" id="KgW-Dn-dSi"/>
+                        <segue destination="3f9-Js-m6N" kind="relationship" relationship="viewControllers" id="KgW-Dn-dSi"/>
                         <segue destination="s9p-FB-J18" kind="relationship" relationship="viewControllers" id="qTS-bE-NDd"/>
                         <segue destination="nBz-Ib-JEr" kind="relationship" relationship="viewControllers" id="dTM-Ad-CYu"/>
                     </connections>
@@ -138,6 +136,27 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XK5-DF-rh5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1052" y="922"/>
+        </scene>
+        <!--Video-->
+        <scene sceneID="BP0-hZ-xNO">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3f9-Js-m6N" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Video" image="tab_video_item" id="4d6-u8-Ajo">
+                        <color key="badgeColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="d71-aU-bHR">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Jts-zO-6x5" kind="relationship" relationship="rootViewController" id="6y5-tY-RCn"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S16-aq-8o2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-110" y="99"/>
         </scene>
     </scenes>
     <resources>
