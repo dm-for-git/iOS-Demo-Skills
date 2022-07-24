@@ -21,7 +21,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lmW-O2-Rqt">
                         <rect key="frame" x="8" y="0.0" width="304" height="92"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="X8t-mS-9jG" customClass="ImageViewLoader" customModule="MetaWeather" customModuleProvider="target">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="X8t-mS-9jG" customClass="ImageLoaderView" customModule="MetaWeather" customModuleProvider="target">
                                 <rect key="frame" x="240" y="8" width="64" height="64"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="X8t-mS-9jG" secondAttribute="height" multiplier="1:1" id="XT6-0V-BKE"/>

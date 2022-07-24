@@ -36,7 +36,7 @@ class WeatherCell: UITableViewCell {
     
     
     @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var imgWeatherState: ImageViewLoader!
+    @IBOutlet weak var imgWeatherState: ImageLoaderView!
     @IBOutlet weak var lblWeatherState: UILabel!
     @IBOutlet weak var lblCurrentTemp: UILabel!
     @IBOutlet weak var lblMaxTemp: UILabel!

@@ -11,16 +11,11 @@ import SwiftMessages
 
 class VideoViewController: UICollectionViewController {
     private let cellIdentifier = String(describing: VideoCell.self)
-    private let footerIdentifier = String(describing: VideoFooterView.self)
-    
     private lazy var viewModel: VideoViewModel = {
         return VideoViewModel()
     }()
     
     private var refreshVC: UIRefreshControl?
-    
-    private var footerView: VideoFooterView?
-    
     private var playerViewController: AVPlayerViewController?
     
     private lazy var messageView = {
@@ -49,18 +44,12 @@ class VideoViewController: UICollectionViewController {
         let cellHeight = cellWidth * 0.75
         if let layout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.headerReferenceSize = .zero
-            layout.footerReferenceSize = CGSize(width: self.collectionView.frame.size.width, height: 55)
             layout.itemSize = CGSize(width: cellWidth, height: cellHeight)
         }
         
         // Register for reusable cell
         collectionView.register(UINib(nibName: cellIdentifier, bundle: nil),
                                 forCellWithReuseIdentifier: cellIdentifier)
-        // Register footer cell
-        collectionView.register(UINib(nibName: footerIdentifier, bundle: nil),
-                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
-                                withReuseIdentifier: footerIdentifier)
-        
         viewModel.fetchMoreData { [weak self] isSuccess in
             DispatchQueue.main.async {
                 if isSuccess {
@@ -146,13 +135,9 @@ extension VideoViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if AVPictureInPictureController.isPictureInPictureSupported() {
-            guard let videoUrl = viewModel.arrThumbnails[indexPath.item].videoUrl else { return }
-            viewModel.currentVideoUrl = videoUrl
-            playVideoVia(playerController: playerViewController!)
-        } else {
-            showDialog(mess: String.stringByKey(key: .errCantPlayInPiP), title: String.stringByKey(key: .dialogTitleError))
-        }
+        guard let videoUrl = viewModel.arrThumbnails[indexPath.item].videoUrl else { return }
+        viewModel.currentVideoUrl = videoUrl
+        playVideoVia(playerController: playerViewController!)
     }
     
     // Load more data when user scroll to the end of the screen
@@ -174,48 +159,6 @@ extension VideoViewController: UICollectionViewDelegateFlowLayout {
                         UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 8, left: 8, bottom: 0, right: 8)
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout:
-                        UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        let standardSize = CGSize(width: collectionView.frame.size.width, height: 55)
-        if viewModel.isLoadingData {
-            self.footerView?.frame.size = standardSize
-        } else {
-            DispatchQueue.main.asyncAfter(deadline: .now()+1) {
-                self.footerView?.frame.size = .zero
-            }
-        }
-        return footerView?.frame.size ?? standardSize
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind
-                                 kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if kind == UICollectionView.elementKindSectionFooter {
-            guard let reusableFooterView = collectionView.dequeueReusableSupplementaryView(ofKind:
-                                                                                            kind, withReuseIdentifier: footerIdentifier, for: indexPath)
-                    as? VideoFooterView else {
-                        return UICollectionReusableView()
-                    }
-            footerView = reusableFooterView
-            return footerView!
-        }
-        return UICollectionReusableView()
-    }
-    // Animate the indicator of the footer
-    override func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView
-                                 view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
-        if elementKind == UICollectionView.elementKindSectionFooter && viewModel.isLoadingData {
-            footerView?.indicatorView.startAnimating()
-        }
-    }
-    // Stop animation of the indicator of the footer
-    override func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView
-                                 view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {
-        if elementKind == UICollectionView.elementKindSectionFooter {
-            footerView?.indicatorView.stopAnimating()
-        }
-    }
-    
 }
 
 // MARK: Video Player

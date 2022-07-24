@@ -11,6 +11,4 @@ extension String {
     static func stringByKey(key: LocalizableKeys) -> String {
         return NSLocalizedString(key.rawValue, comment: "")
     }
-    
-    
 }

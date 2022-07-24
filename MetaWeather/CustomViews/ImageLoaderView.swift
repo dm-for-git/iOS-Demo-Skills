@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ImageViewLoader: UIImageView {
+class ImageLoaderView: UIImageView {
     
     func load(strUrl: String) {
         PhotoDownloader.shared.downloadPhotoFrom(photoUrl: strUrl) { image in

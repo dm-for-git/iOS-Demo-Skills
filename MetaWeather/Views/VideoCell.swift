@@ -16,7 +16,7 @@ class VideoCell: UICollectionViewCell {
     }
     
     
-    @IBOutlet weak var imgThumbnail: ImageViewLoader!
+    @IBOutlet weak var imgThumbnail: ImageLoaderView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

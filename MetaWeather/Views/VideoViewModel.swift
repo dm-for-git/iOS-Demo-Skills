@@ -89,31 +89,4 @@ final class VideoViewModel {
         }
         queue.waitUntilAllOperationsAreFinished()
     }
-    
-    /*
-    func insertApiToken() {
-        DataManager.shared.saveConfig(strData: kApiToken) {result in
-            switch result {
-            case .success(_ ):
-                print("Insert API Success")
-            case .failure(let err):
-                print(err.description)
-            }
-        }
-    }
-
-    func getApiToken() {
-        DataManager.shared.fetchAllConfigurations {[unowned self] result in
-            switch result {
-            case .success(let configs):
-                guard let config = configs.first else { return }
-                guard let token = config.pexelToken?.first else { return }
-                print("API TOKEN = \(token)")
-            case .failure(let err):
-                print(err.description)
-                insertApiToken()
-            }
-        }
-    }
-    */
 }

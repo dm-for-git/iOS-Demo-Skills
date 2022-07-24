@@ -19,6 +19,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Setup network's state publisher
         setupNetworkListenner()
         // You've to set this for PiP(Picture in Picture) mode.
+        registerAudioCapability()
+        
+        // Setup notification
+        NotificationManager.shared.requestUserPermission()
+        return true
+    }
+    
+    private func registerAudioCapability() {
         let audioSession = AVAudioSession.sharedInstance()
         
         do {
@@ -26,10 +34,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } catch {
             print(error.localizedDescription)
         }
-        
-        // Setup notification
-        NotificationManager.shared.requestUserPermission()
-        return true
     }
     
     private func setupNetworkListenner() {
