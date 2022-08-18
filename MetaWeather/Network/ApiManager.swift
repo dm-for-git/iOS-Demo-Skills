@@ -147,8 +147,6 @@ class ApiManager: NSCopying {
     }
     
     private func lastComponentFrom(link: String) -> String {
-        // "https://i.imgur.com/q3e87zR.gif"
-        
         guard let index = link.lastIndex(of: "/") else { return "demo.gif" }
         
         return String(link.suffix(from: index))

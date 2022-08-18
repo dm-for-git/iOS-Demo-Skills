@@ -30,8 +30,6 @@ class VideoViewController: UICollectionViewController {
                                                name: .networkStatus, object: nil)
 
         setupUi()
-//        setupData()
-        viewModel.downloadGifFrom(link: "https://i.imgur.com/q3e87zR.gif")
     }
     
     private func setupUi() {

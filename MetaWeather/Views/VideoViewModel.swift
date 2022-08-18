@@ -91,6 +91,7 @@ final class VideoViewModel {
     }
     
     func downloadGifFrom(link: String) {
+        // https://i.imgur.com/q3e87zR.gif
         apiManager.downloadFromUrl(link: link) { [weak self] result in
             switch result {
             case .success(let path):
