@@ -14,7 +14,6 @@ struct LatestNewsView: View {
     
     var body: some View {
         ZStack {
-            
             setupView()
         }
         

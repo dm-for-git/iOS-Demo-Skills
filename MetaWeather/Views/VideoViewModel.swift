@@ -89,4 +89,16 @@ final class VideoViewModel {
         }
         queue.waitUntilAllOperationsAreFinished()
     }
+    
+    func downloadGifFrom(link: String) {
+        apiManager.downloadFromUrl(link: link) { [weak self] result in
+            switch result {
+            case .success(let path):
+                print("File was downloaded at = \(path)")
+            case .failure(let err):
+                print(err.localizedDescription)
+            }
+        }
+    }
+    
 }

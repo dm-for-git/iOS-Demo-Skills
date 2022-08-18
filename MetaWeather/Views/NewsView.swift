@@ -12,12 +12,6 @@ struct NewsView: View {
     let viewModel = NewsListViewModel()
     
     var body: some View {
-        //        viewModel.fetchNews {[weak self] isSuccess in
-        //            if isSuccess {
-        //                print(self?.viewModel.arrNewsHeader[0])
-        //            }
-        //        }
-        
         NavigationView {
             ZStack {
                 Color("#EFFAFD").ignoresSafeArea()

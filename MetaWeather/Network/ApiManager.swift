@@ -21,10 +21,11 @@ class ApiManager: NSCopying {
     
     private lazy var defaultSession: URLSession = {
         let config = URLSessionConfiguration.default
-        config.waitsForConnectivity = true
         // Set timeout in second
         config.timeoutIntervalForResource = 10
         config.timeoutIntervalForRequest = 10
+        
+        config.waitsForConnectivity = true
         
         let session = URLSession(configuration: config)
         
@@ -111,7 +112,48 @@ class ApiManager: NSCopying {
             dataTask?.resume()
         }
     }
-
+    
+    // MARK: Downloading
+    func downloadFromUrl(link: String, completionHandler: @escaping(Result<String, CustomError>) -> Void) {
+        if let url = URL(string: link) {
+            let downloadTask = defaultSession.downloadTask(with: url, completionHandler: {[weak self] urlOrNil, responseOrNil, errorOrNil in
+                if let customError = errorOrNil as? CustomError {
+                    print("Downloading error = \(customError.localizedDescription)")
+                    completionHandler(.failure(customError))
+                }
+                if let fileURL = urlOrNil {
+                    do {
+                        //                        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+                        let documentsURL = try FileManager.default.url(for: .documentDirectory,
+                                                                       in: .userDomainMask,
+                                                                       appropriateFor: nil,
+                                                                       create: true)
+                        let dataUrl = documentsURL.appendingPathComponent(fileURL.lastPathComponent)
+                        try FileManager.default.copyItem(at: fileURL, to: dataUrl)
+                        let fileData = try Data(contentsOf: dataUrl)
+                        let fileName = documentsURL.path + (self?.lastComponentFrom(link: link) ?? "")
+                        FileManager.default.createFile(atPath: fileName, contents: fileData)
+                        completionHandler(.success(fileName))
+                    } catch {
+                        print("File error = \(error.localizedDescription)")
+                        if let customErr = error as? CustomError {
+                            completionHandler(.failure(customErr))
+                        }
+                    }
+                }
+            })
+            downloadTask.resume()
+        }
+    }
+    
+    private func lastComponentFrom(link: String) -> String {
+        // "https://i.imgur.com/q3e87zR.gif"
+        
+        guard let index = link.lastIndex(of: "/") else { return "demo.gif" }
+        
+        return String(link.suffix(from: index))
+    }
+    
     // MARK: Utilities
     private func createQueryParamFrom(params: [String: String]) -> [URLQueryItem] {
         var result = [URLQueryItem]()

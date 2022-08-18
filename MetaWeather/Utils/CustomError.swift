@@ -16,6 +16,8 @@ enum CustomError: Error, CustomStringConvertible {
             return "An unexpected error occured"
         case .networkError:
             return "Error about internet connection"
+        default:
+            return self.localizedDescription
         }
     }
     

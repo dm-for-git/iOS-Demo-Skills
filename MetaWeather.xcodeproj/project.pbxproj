@@ -44,6 +44,7 @@
 		D5831117288083E500274831 /* PhotoDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D583111528807F5900274831 /* PhotoDownloader.swift */; };
 		D5976E2E288726AB000125C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA8644EA26BD64F200973985 /* Assets.xcassets */; };
 		D5997C51287DDF100090D635 /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5997C50287DDF100090D635 /* Array+.swift */; };
+		D5BD1BFB28AEADE400EC7B34 /* LatestNewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BD1BFA28AEADE400EC7B34 /* LatestNewsViewModel.swift */; };
 		D5C61F942871D017003A7ADA /* coordinate.json in Resources */ = {isa = PBXBuildFile; fileRef = D5C61F932871D017003A7ADA /* coordinate.json */; };
 		D5C61F962871D076003A7ADA /* CoordinateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C61F952871D076003A7ADA /* CoordinateTest.swift */; };
 		FA0BEE4526E4C8D8002D9B34 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0BEE4426E4C8D8002D9B34 /* UIViewController+.swift */; };
@@ -157,6 +158,7 @@
 		D583110D28807EC900274831 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D583111528807F5900274831 /* PhotoDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDownloader.swift; sourceTree = "<group>"; };
 		D5997C50287DDF100090D635 /* Array+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
+		D5BD1BFA28AEADE400EC7B34 /* LatestNewsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestNewsViewModel.swift; sourceTree = "<group>"; };
 		D5C61F932871D017003A7ADA /* coordinate.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = coordinate.json; sourceTree = "<group>"; };
 		D5C61F952871D076003A7ADA /* CoordinateTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateTest.swift; sourceTree = "<group>"; };
 		FA0BEE4426E4C8D8002D9B34 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
@@ -272,6 +274,7 @@
 			isa = PBXGroup;
 			children = (
 				BACE9A1027C8C8DF007D28DF /* NewsListViewModel.swift */,
+				D5BD1BFA28AEADE400EC7B34 /* LatestNewsViewModel.swift */,
 			);
 			path = News;
 			sourceTree = "<group>";
@@ -719,6 +722,7 @@
 				FACF1D4726C61FF500270776 /* VideoViewController.swift in Sources */,
 				FA147E9526BD9758007694FE /* Constants.swift in Sources */,
 				BACE9A0C27C8B58A007D28DF /* NewsHeader.swift in Sources */,
+				D5BD1BFB28AEADE400EC7B34 /* LatestNewsViewModel.swift in Sources */,
 				FA86451B26BD72F300973985 /* ApiManager.swift in Sources */,
 				BACA6EA427CC89920054EF5C /* View+.swift in Sources */,
 				BA7ECF7627CF2FCF00DF1D8F /* FavoriteButton.swift in Sources */,
@@ -804,8 +808,8 @@
 			baseConfigurationReference = FA5DB1BC26C7F5120095D264 /* Configs.xcconfig */;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N7RU9Y475K;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -821,7 +825,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = baodng.test.DemoSkill.MetaNotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "MetaNotificationService-Dev";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -834,10 +838,10 @@
 			baseConfigurationReference = FA5DB1BC26C7F5120095D264 /* Configs.xcconfig */;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = N7RU9Y475K;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MetaNotificationService/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MetaNotificationService;
@@ -851,7 +855,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = baodng.test.DemoSkill.MetaNotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "MetaNotificationService-Dis";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -987,8 +991,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = MetaWeather/MetaWeather.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N7RU9Y475K;
 				INFOPLIST_FILE = MetaWeather/Base/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -998,7 +1002,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = baodng.test.DemoSkill;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Demo-Skill-Development";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZE_OBJECT_LIFETIME = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1013,9 +1017,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = MetaWeather/MetaWeather.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = N7RU9Y475K;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = MetaWeather/Base/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1024,7 +1028,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = baodng.test.DemoSkill;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Demo-Skill-Distribution";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZE_OBJECT_LIFETIME = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
