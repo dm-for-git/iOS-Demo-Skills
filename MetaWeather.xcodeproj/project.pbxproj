@@ -279,6 +279,8 @@
 		BAF7D7F727CA0AF20049A7BC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FA9F1BEA26E323110059528A /* Colors.xcassets */,
+				FA8644EA26BD64F200973985 /* Assets.xcassets */,
 				BAF7D7FE27CA19240049A7BC /* cat-loading.json */,
 			);
 			path = Resources;
@@ -382,8 +384,6 @@
 				FA86451326BD6C8A00973985 /* Models */,
 				FA86451226BD6C8200973985 /* ViewModels */,
 				FA86451126BD6C7B00973985 /* Views */,
-				FA8644EA26BD64F200973985 /* Assets.xcassets */,
-				FA9F1BEA26E323110059528A /* Colors.xcassets */,
 				FA8644E726BD64F100973985 /* MetaWeather.xcdatamodeld */,
 			);
 			path = MetaWeather;

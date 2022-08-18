@@ -25,10 +25,10 @@ class VideoViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         LoadingView.shared.startLoadingVia(parentView: view)
-        
+
         NotificationCenter.default.addObserver(self, selector: #selector(networkSubscriber),
                                                name: .networkStatus, object: nil)
-        
+
         setupUi()
         setupData()
     }
