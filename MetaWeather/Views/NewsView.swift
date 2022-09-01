@@ -14,7 +14,7 @@ struct NewsView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                Color("#EFFAFD").ignoresSafeArea()
+                Color("defaultTint").ignoresSafeArea()
                 VStack{
                     LatestNewsView(names: viewModel.arrNames, avatars: viewModel.arrAvatars, positions: viewModel.arrPositions)
                         .aspectRatio(3/2, contentMode: .fit)
@@ -24,6 +24,7 @@ struct NewsView: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
                     .navigationTitle("Latest News")
+                    .foregroundColor(Color("text"))
             }
         }
     }
@@ -34,6 +35,6 @@ struct NewsPreview: PreviewProvider {
     static var previews: some View {
         Group {
             NewsView()
-        }
+        }.preferredColorScheme(.dark)
     }
 }

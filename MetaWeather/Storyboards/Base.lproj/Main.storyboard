@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Mgb-mP-hfp">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <device id="retina4_7" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
@@ -26,7 +26,7 @@
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="j8K-Pv-Z7r">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" name="defaultPink"/>
+                        <color key="backgroundColor" name="defaultTint"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="2cY-h9-gcr">
                             <size key="itemSize" width="128" height="128"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -53,9 +53,9 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5y9-1p-T5S">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" name="defaultPink"/>
-                        <color key="tintColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="barTintColor" name="#EFFAFD"/>
+                        <color key="backgroundColor" name="defaultTint"/>
+                        <color key="tintColor" name="defaultTint"/>
+                        <color key="barTintColor" name="defaultTint"/>
                         <color key="selectedImageTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
@@ -75,7 +75,8 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="k6u-Md-4Zn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="defaultTint"/>
+                        <color key="sectionIndexBackgroundColor" name="defaultTint"/>
                         <connections>
                             <outlet property="dataSource" destination="VB3-tY-3Dz" id="AGc-Kt-f4u"/>
                             <outlet property="delegate" destination="VB3-tY-3Dz" id="otx-hp-L2Y"/>
@@ -159,15 +160,13 @@
             <point key="canvasLocation" x="-110" y="99"/>
         </scene>
     </scenes>
+    <color key="tintColor" name="defaultTint"/>
     <resources>
         <image name="tab_news_item" width="32" height="32"/>
         <image name="tab_video_item" width="32" height="32"/>
         <image name="tab_weather_item" width="32" height="32"/>
-        <namedColor name="#EFFAFD">
-            <color red="0.93725490196078431" green="0.98039215686274506" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-        </namedColor>
-        <namedColor name="defaultPink">
-            <color red="0.43137254901960786" green="0.9137254901960784" blue="0.28235294117647058" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        <namedColor name="defaultTint">
+            <color red="0.92941176470588238" green="0.45882352941176469" blue="0.27843137254901962" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

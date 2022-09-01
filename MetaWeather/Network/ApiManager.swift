@@ -114,6 +114,13 @@ class ApiManager: NSCopying {
     }
     
     // MARK: Downloading
+    /**
+     Remember to add these keys into Infor.plist file in order to allow users
+     can access downloaded files via the File app of iOS
+     Application supports iTunes file sharing
+     * UIFileSharingEnabled = YES
+     * LSSupportsOpeningDocumentsInPlace = YES
+     */
     func downloadFromUrl(link: String, completionHandler: @escaping(Result<String, CustomError>) -> Void) {
         if let url = URL(string: link) {
             let downloadTask = defaultSession.downloadTask(with: url, completionHandler: {[weak self] urlOrNil, responseOrNil, errorOrNil in

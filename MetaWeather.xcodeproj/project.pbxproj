@@ -1019,7 +1019,7 @@
 				CODE_SIGN_ENTITLEMENTS = MetaWeather/MetaWeather.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = N7RU9Y475K;
 				INFOPLIST_FILE = MetaWeather/Base/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (

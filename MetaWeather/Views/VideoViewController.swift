@@ -30,6 +30,7 @@ class VideoViewController: UICollectionViewController {
                                                name: .networkStatus, object: nil)
 
         setupUi()
+        setupData()
     }
     
     private func setupUi() {

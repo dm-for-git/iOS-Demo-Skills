@@ -22,5 +22,4 @@ struct Video: Codable {
         videoFiles = try values.decodeIfPresent([VideoFile].self, forKey: .videoFiles)
         videoPictures = try values.decodeIfPresent([VideoPicture].self, forKey: .videoPictures)
     }
-    
 }

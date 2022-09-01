@@ -22,7 +22,7 @@ class WeatherViewController: UITableViewController {
     
     lazy var refreshVC: UIRefreshControl = {
         let vc = UIRefreshControl()
-        vc.tintColor = .cyan
+        vc.tintColor = .systemPurple
         vc.addTarget(self, action: #selector(fetchData), for: .valueChanged)
         return vc
     }()
@@ -82,7 +82,7 @@ class WeatherViewController: UITableViewController {
     
     private func setupTableView() {
         tableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
-        tableView.backgroundColor = UIColor(named: "#EFFAFD")
+//        tableView.backgroundColor = UIColor(named: "#EFFAFD")
         tableView.register(UINib(nibName: cellIdentifier, bundle: nil), forCellReuseIdentifier: cellIdentifier)
         tableView.estimatedRowHeight = UITableView.automaticDimension
         tableView.rowHeight = estimateCellHeight

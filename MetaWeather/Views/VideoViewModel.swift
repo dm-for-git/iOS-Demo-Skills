@@ -24,7 +24,7 @@ final class VideoViewModel {
     
     func fetchMoreData(handler: @escaping(Bool) -> Void) {
         let queue = OperationQueue()
-        queue.maxConcurrentOperationCount = 2
+        queue.maxConcurrentOperationCount = 4
         
         queue.addOperation {[unowned self] in
             var parameters: [String: String] = [:]
@@ -62,7 +62,7 @@ final class VideoViewModel {
     
     private func exactNestedDataFrom(data: Page, finish: @escaping(Bool) -> Void) {
         let queue = OperationQueue()
-        queue.maxConcurrentOperationCount = 2
+        queue.maxConcurrentOperationCount = 4
         
         queue.addOperation {[unowned self] in
             for video in data.videos ?? [] {
@@ -88,18 +88,5 @@ final class VideoViewModel {
             finish(true)
         }
         queue.waitUntilAllOperationsAreFinished()
-    }
-    
-    func downloadGifFrom(link: String) {
-        // https://i.imgur.com/q3e87zR.gif
-        apiManager.downloadFromUrl(link: link) { [weak self] result in
-            switch result {
-            case .success(let path):
-                print("File was downloaded at = \(path)")
-            case .failure(let err):
-                print(err.localizedDescription)
-            }
-        }
-    }
-    
+    }    
 }

@@ -27,5 +27,4 @@ struct VideoPicture: Codable {
         pictureId = try values.decodeIfPresent(Int.self, forKey: .pictureId)
         pictureUrl = try values.decodeIfPresent(String.self, forKey: .pictureUrl)
     }
-    
 }
