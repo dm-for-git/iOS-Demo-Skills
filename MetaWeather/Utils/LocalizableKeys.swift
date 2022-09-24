@@ -12,6 +12,7 @@ enum LocalizableKeys: String {
     case msgCantLoadData
     case msgInternetLost
     case errCantPlayInPiP
+    case errApiKeyIsMissing
     case dialogTitleError
     case dialogTitleSuccess
     case dialogTitleWarning

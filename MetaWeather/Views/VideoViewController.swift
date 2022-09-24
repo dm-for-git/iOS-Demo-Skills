@@ -58,12 +58,12 @@ class VideoViewController: UICollectionViewController {
     }
     
     private func setupData() {
-        viewModel.fetchMoreData { [weak self] isSuccess in
+        viewModel.fetchMoreData { [weak self] result in
             DispatchQueue.main.async {
-                if isSuccess {
+                if result.isEmpty {
                     self?.collectionView.reloadData()
                 } else {
-                    self?.showMessageBaseOn(type: .error, message: String.stringByKey(key: .msgCantLoadData))
+                    self?.showMessageBaseOn(type: .error, message: result)
                 }
                 
             }
@@ -75,13 +75,13 @@ class VideoViewController: UICollectionViewController {
     // MARK: Data Loading
     @objc private func refreshData(_ sender: Any) {
         refreshVC?.beginRefreshing()
-        viewModel.fetchMoreData { [weak self] isSuccess in
+        viewModel.fetchMoreData { [weak self] result in
             DispatchQueue.main.async {
-                if isSuccess {
+                if result.isEmpty {
                     self?.viewModel.isLoadingData = false
                     self?.collectionView.reloadData()
                 } else {
-                    self?.showMessageBaseOn(type: .error, message: String.stringByKey(key: .msgCantLoadData))
+                    self?.showMessageBaseOn(type: .error, message: result)
                 }
                 self?.refreshVC?.endRefreshing()
             }
@@ -91,13 +91,13 @@ class VideoViewController: UICollectionViewController {
     private func loadMoreData() {
         LoadingView.shared.startLoadingVia(parentView: view)
         viewModel.isLoadingData = true
-        viewModel.fetchMoreData { [weak self] isSuccess in
+        viewModel.fetchMoreData { [weak self] result in
             DispatchQueue.main.async {
-                if isSuccess {
+                if result.isEmpty {
                     self?.collectionView.reloadItems(at: [IndexPath(item: self?.viewModel.lastPreviousIndex ?? 0, section: 0)])
                     self?.viewModel.isLoadingData = false
                 } else {
-                    self?.showMessageBaseOn(type: .error, message: String.stringByKey(key: .msgCantLoadData))
+                    self?.showMessageBaseOn(type: .error, message: result)
                 }
             }
             LoadingView.shared.stopLoading()

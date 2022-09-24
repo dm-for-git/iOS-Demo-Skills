@@ -25,3 +25,4 @@
 "msgInternetLost" = "Internet connection is lost, try again later";
 "msgCantPlayVideo" = "Video can't be played";
 "errCantPlayInPiP" = "This device doesn't support PiP mode";
+"errApiKeyIsMissing" = "API key is missing";

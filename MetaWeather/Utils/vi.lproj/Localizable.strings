@@ -25,3 +25,4 @@
 "msgInternetLost" = "Không có kết nối mạng, hãy thử lại sau";
 "msgCantPlayVideo" = "Không thể hiển thị video";
 "errCantPlayInPiP" = "Thiết bị này không hỗ trợ chế độ PiP";
+"errApiKeyIsMissing" = "Không tìm thấy API key";

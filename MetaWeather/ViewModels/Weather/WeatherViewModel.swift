@@ -18,7 +18,7 @@ final class WeatherViewModel {
     }()
     
     // MARK: Load Local Data
-    private func loadLocalData(completionHandler: @escaping(Bool) -> Void) {
+    private func loadLocalData(completionHandler: @escaping(String) -> Void) {
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = 3
         
@@ -28,10 +28,10 @@ final class WeatherViewModel {
                 switch result {
                 case .success(let weathers):
                     self?.arrWeather = weathers
-                    completionHandler(true)
+                    completionHandler("")
                 case .failure(let err):
-                    print("Load local data fail: \(err.description)")
-                    completionHandler(false)
+                    print("Load data fail: \(err.localizedDescription)")
+                    completionHandler(err.localizedDescription)
                 }
             }
         }
@@ -39,13 +39,19 @@ final class WeatherViewModel {
     }
     
     // MARK: Fetch Data From Server
-    func fetchWeather(completionHandler: @escaping(Bool) -> Void) {
+    func fetchWeather(completionHandler: @escaping(String) -> Void) {
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = 3
         
         queue.addOperation {[unowned self] in
             let apiManager = ApiManager.shared
             let strUrl = Constants.apiRootPath + Constants.apiWeather
+            
+            guard ApiManager.weatherServiceApiKey != "" else  {
+                completionHandler(String.stringByKey(key: .dialogLostInternet))
+                return
+            }
+            
             let params: [String: String] = ["lat": "\(currentCoordinate.0)", "lon": "\(currentCoordinate.1)",
                                             "units": "metric", "appid": ApiManager.weatherServiceApiKey]
             
@@ -57,13 +63,11 @@ final class WeatherViewModel {
                         let weathers = try jsonDecoder.decode(Weather.self, from: data)
                         self?.filterData(newWeather: [weathers], handler: completionHandler)
                     } catch {
-                        print(error.localizedDescription)
                         self?.loadLocalData { result in
                             completionHandler(result)
                         }
                     }
-                case .failure(let error):
-                    print(error.localizedDescription)
+                case .failure(_):
                     self?.loadLocalData { result in
                         completionHandler(result)
                     }
@@ -103,7 +107,7 @@ final class WeatherViewModel {
     }
     
     // MARK: Filter Data
-    private func filterData(newWeather: [Weather], handler: @escaping(Bool) -> Void) {
+    private func filterData(newWeather: [Weather], handler: @escaping(String) -> Void) {
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = 3
 
@@ -119,9 +123,9 @@ final class WeatherViewModel {
         queue.waitUntilAllOperationsAreFinished()
         if !arrWeather.isEmpty {
             insertAllData(filteredWeather: arrWeather)
-            handler(true)
+            handler("")
         } else {
-            handler(false)
+            handler("false")
         }
     }
     

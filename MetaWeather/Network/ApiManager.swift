@@ -22,8 +22,8 @@ class ApiManager: NSCopying {
     private lazy var defaultSession: URLSession = {
         let config = URLSessionConfiguration.default
         // Set timeout in second
-        config.timeoutIntervalForResource = 10
-        config.timeoutIntervalForRequest = 10
+        config.timeoutIntervalForResource = 20
+        config.timeoutIntervalForRequest = 20
         
         config.waitsForConnectivity = true
         
@@ -48,11 +48,15 @@ class ApiManager: NSCopying {
             var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData)
             request.httpMethod = "GET"
             if let isUsingBearer = withBearer, isUsingBearer == true {
+                guard videoServiceToken != "" else {
+                    completion(.failure(.tokenMissing))
+                    return
+                }
                 let bearer = "Bearer \(videoServiceToken)"
                 request.setValue(bearer, forHTTPHeaderField: "Authorization")
             }
             
-            dataTask = defaultSession.dataTask(with: request, completionHandler: {  [weak self] data, response, error in
+            dataTask = defaultSession.dataTask(with: request, completionHandler: {[weak self] data, response, error in
                 defer {
                     self?.dataTask = nil
                 }
@@ -62,9 +66,14 @@ class ApiManager: NSCopying {
                 } else if let networkError = error as? URLError {
                     print("Network error = \(networkError.localizedDescription)")
                     completion(.failure(.networkError))
-                } else if let data = data {
-                    // let response = response as? HTTPURLResponse
-                    completion(.success(data))
+                } else if let response = response as? HTTPURLResponse,
+                            response.statusCode <= 300 {
+                    if let data = data {
+                        completion(.success(data))
+                    }
+                } else {
+                    // This is where the HTTP Status Code > 300
+                    completion(.failure(.serverError))
                 }
             })
             dataTask?.resume()
@@ -130,7 +139,6 @@ class ApiManager: NSCopying {
                 }
                 if let fileURL = urlOrNil {
                     do {
-                        //                        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
                         let documentsURL = try FileManager.default.url(for: .documentDirectory,
                                                                        in: .userDomainMask,
                                                                        appropriateFor: nil,
@@ -154,7 +162,7 @@ class ApiManager: NSCopying {
     }
     
     private func lastComponentFrom(link: String) -> String {
-        guard let index = link.lastIndex(of: "/") else { return "demo.gif" }
+        guard let index = link.lastIndex(of: "/") else { return "" }
         
         return String(link.suffix(from: index))
     }

@@ -99,12 +99,12 @@ class WeatherViewController: UITableViewController {
     
     // MARK: Data
     @objc func fetchData() {
-        viewModel.fetchWeather {[weak self] isSuccess in
+        viewModel.fetchWeather {[weak self] result in
             DispatchQueue.main.async {
-                if isSuccess {
+                if result.isEmpty {
                     self?.tableView.reloadData()
                 } else {
-                    self?.showMessageBaseOn(type: .error, message: String.stringByKey(key: .dialogUpdateDataFail))
+                    self?.showMessageBaseOn(type: .error, message: result)
                 }
                 self?.refreshVC.endRefreshing()
             }

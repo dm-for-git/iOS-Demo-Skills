@@ -21,7 +21,7 @@ class DataManager: NSCopying {
     func insertWeather(weather: Weather, handler: @escaping(Result<Bool, CustomError>) -> Void) {
         DispatchQueue.main.async {
             guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-                handler(.failure(.unknownError))
+                handler(.failure(.nilError))
                 return
             }
             let queue = OperationQueue()
@@ -52,7 +52,7 @@ class DataManager: NSCopying {
     func fetchAllWeathers(handler: @escaping(Result<[Weather], CustomError>) -> Void) {
         DispatchQueue.main.async {
             guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-                handler(.failure(.unknownError))
+                handler(.failure(.nilError))
                 return
             }
             let queue = OperationQueue()
@@ -78,7 +78,7 @@ class DataManager: NSCopying {
                         }
                         handler(.success(weathers))
                     } else {
-                        handler(.failure(.unknownError))
+                        handler(.failure(.nilError))
                     }
                     
                 } catch {
@@ -93,7 +93,7 @@ class DataManager: NSCopying {
     func deleteAllData(entityName: String, handler: @escaping(Result<Bool, CustomError>) -> Void) {
         DispatchQueue.main.async {
             guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-                handler(.failure(.unknownError))
+                handler(.failure(.nilError))
                 return
             }
             let queue = OperationQueue()

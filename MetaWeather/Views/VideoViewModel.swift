@@ -22,7 +22,7 @@ final class VideoViewModel {
     // For efficient reload data
     var lastPreviousIndex = 0
     
-    func fetchMoreData(handler: @escaping(Bool) -> Void) {
+    func fetchMoreData(handler: @escaping(String) -> Void) {
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = 4
         
@@ -48,11 +48,11 @@ final class VideoViewModel {
                         }
                     } catch {
                         print(error.localizedDescription)
-                        handler(false)
+                        handler(error.localizedDescription)
                     }
                 case .failure(let error):
-                    print(error.description)
-                    handler(false)
+                    print(error.localizedDescription)
+                    handler(error.localizedDescription)
                 }
                 
             }
@@ -60,7 +60,7 @@ final class VideoViewModel {
         queue.waitUntilAllOperationsAreFinished()
     }
     
-    private func exactNestedDataFrom(data: Page, finish: @escaping(Bool) -> Void) {
+    private func exactNestedDataFrom(data: Page, finish: @escaping(String) -> Void) {
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = 4
         
@@ -85,7 +85,7 @@ final class VideoViewModel {
             // Set the next page need to be called when the the user scroll down to the end of the screen
             nextPage = data.nextPage ?? ""
             
-            finish(true)
+            finish("")
         }
         queue.waitUntilAllOperationsAreFinished()
     }    
