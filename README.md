@@ -6,8 +6,8 @@ Moreover, you'll see SOLID principle is applied throught the project.
 * Checkout the "main" branch for demonstration purpose
 * In the first time you open this project please wait until Swift Package Manger is finished its job.
 * You should test this project on an actual device for the best experience.
-* This app has three tabs, the first tab is for random videos from https://pexels.com , the second one is weather tab from https://www.metaweather.com and the last tab is for demostration about SwiftUI.
-* This demo need a API key of Pexel, you can request one here https://www.pexels.com/api/new/
+* This app has three tabs, the first tab is for random videos from https://pexels.com , the second one is weather tab from https://openweathermap.org/ and the last tab is for demostration about SwiftUI.
+* This demo need API keys of both Pexel & OpenWeatherMap services, you can request one here https://www.pexels.com/api/new and https://openweathermap.org/api
 
 *** The project also contains an extension of notification so you'll need a paid account to create a provisioning for testing Remote Push Notification.
 
