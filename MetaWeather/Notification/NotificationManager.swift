@@ -8,7 +8,7 @@
 import UserNotifications
 import UIKit
 
-class NotificationManager: NSCopying {
+final class NotificationManager: NSCopying, Sendable {
     
     static let shared = NotificationManager()
     

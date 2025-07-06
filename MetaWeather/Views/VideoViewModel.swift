@@ -7,7 +7,12 @@
 
 import Foundation
 
-final class VideoViewModel {
+typealias TaskCompletion = @Sendable (String) -> Void
+
+final class VideoViewModel: Sendable {
+    
+    
+    
     lazy var apiManager: ApiManager = {
         return ApiManager.shared
     }()
@@ -22,49 +27,42 @@ final class VideoViewModel {
     // For efficient reload data
     var lastPreviousIndex = 0
     
-    func fetchMoreData(handler: @escaping(String) -> Void) {
-        let queue = OperationQueue()
-        queue.maxConcurrentOperationCount = 4
-        
-        queue.addOperation {[unowned self] in
+    func fetchMoreData(handler: @escaping TaskCompletion) async {
+        Task {[weak self] in
             var parameters: [String: String] = [:]
             var url = Constants.apiGetVideo
-            if nextPage == "" {
+            if self?.nextPage == "" {
                 parameters = ["per_page": "10"]
             } else {
-                url = nextPage
+                url = self?.nextPage ?? ""
             }
             
-            apiManager.getRequest(url: url, withBearer: true, params: parameters) {[weak self] result in
-                switch result {
-                case .success(let notNilData):
-                    let decoder = JSONDecoder()
-                    do {
-                        let videos = try decoder.decode(Page.self, from: notNilData)
-                        queue.addOperation {
-                            self?.exactNestedDataFrom(data: videos) { isSuccess in
-                                handler(isSuccess)
-                            }
-                        }
-                    } catch {
-                        print(error.localizedDescription)
-                        handler(error.localizedDescription)
+            let result = await self?.apiManager.getRequest(url: url, params: parameters)
+            switch result {
+            case .success(let notNilData):
+                let decoder = JSONDecoder()
+                do {
+                    let videos = try decoder.decode(Page.self, from: notNilData)
+                    await self?.exactNestedDataFrom(data: videos) { isSuccess in
+                        handler(isSuccess)
                     }
-                case .failure(let error):
+                } catch {
                     print(error.localizedDescription)
                     handler(error.localizedDescription)
                 }
-                
+            case .failure(let error):
+                print(error.localizedDescription)
+                handler(error.localizedDescription)
+            case .none:
+                break
             }
         }
-        queue.waitUntilAllOperationsAreFinished()
+        
+        
     }
     
-    private func exactNestedDataFrom(data: Page, finish: @escaping(String) -> Void) {
-        let queue = OperationQueue()
-        queue.maxConcurrentOperationCount = 4
-        
-        queue.addOperation {[unowned self] in
+    private func exactNestedDataFrom(data: Page, finish: @escaping TaskCompletion) async {
+        Task {
             for video in data.videos ?? [] {
                 var fileUrl = ""
                 var pictureUrl = ""
@@ -87,6 +85,8 @@ final class VideoViewModel {
             
             finish("")
         }
-        queue.waitUntilAllOperationsAreFinished()
-    }    
+        
+        
+        
+    }
 }

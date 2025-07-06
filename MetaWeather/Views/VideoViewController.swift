@@ -43,9 +43,10 @@ class VideoViewController: UICollectionViewController {
         refreshVC?.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
         collectionView.refreshControl = refreshVC
         
-        
-        // Calculate cell layout
-        let cellWidth = view.frame.size.width/2 - 16
+        // Calculate cell layout, the number of columns will be based on
+        // dividend of `view.frame.size.width` in this case is 2
+        // which means 2 columns
+        let cellWidth = view.frame.size.width/2 - 16 // 16 is left + right margins
         let cellHeight = cellWidth * 0.75
         if let layout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.headerReferenceSize = .zero
@@ -57,6 +58,9 @@ class VideoViewController: UICollectionViewController {
                                 forCellWithReuseIdentifier: cellIdentifier)
     }
     
+    
+    // MARK: Data Loading
+    
     private func setupData() {
         viewModel.fetchMoreData { [weak self] result in
             DispatchQueue.main.async {
@@ -65,14 +69,11 @@ class VideoViewController: UICollectionViewController {
                 } else {
                     self?.showMessageBaseOn(type: .error, message: result)
                 }
-                
+                LoadingView.shared.stopLoading()
             }
-            LoadingView.shared.stopLoading()
         }
     }
     
-    
-    // MARK: Data Loading
     @objc private func refreshData(_ sender: Any) {
         refreshVC?.beginRefreshing()
         viewModel.fetchMoreData { [weak self] result in
@@ -94,7 +95,8 @@ class VideoViewController: UICollectionViewController {
         viewModel.fetchMoreData { [weak self] result in
             DispatchQueue.main.async {
                 if result.isEmpty {
-                    self?.collectionView.reloadItems(at: [IndexPath(item: self?.viewModel.lastPreviousIndex ?? 0, section: 0)])
+                    guard let indexPaths = self?.collectionView.indexPathsForVisibleItems else { return }
+                    self?.collectionView.reloadItems(at: indexPaths)
                     self?.viewModel.isLoadingData = false
                 } else {
                     self?.showMessageBaseOn(type: .error, message: result)
@@ -153,10 +155,8 @@ extension VideoViewController {
                                  cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if indexPath.item == viewModel.arrThumbnails.count - 1 && !viewModel.isLoadingData {
             viewModel.lastPreviousIndex = viewModel.arrThumbnails.count - 2
-            loadMoreData()
         }
     }
-    
 }
 
 
@@ -170,7 +170,6 @@ extension VideoViewController: UICollectionViewDelegateFlowLayout {
 }
 
 // MARK: Video Player
-
 extension VideoViewController: AVPlayerViewControllerDelegate {
     
     func playerViewController(_ playerViewController: AVPlayerViewController,
@@ -199,5 +198,12 @@ extension VideoViewController: AVPlayerViewControllerDelegate {
             
             present(playerController, animated: false, completion: nil)
         }
+    }
+}
+
+// MARK: UIScrollViewDelegate
+extension VideoViewController {
+    override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        loadMoreData()
     }
 }

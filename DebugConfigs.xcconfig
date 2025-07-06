@@ -1,0 +1,23 @@
+//
+//  DebugConfigs.xcconfig
+//  MetaWeather
+//
+//  Created by David Martin on 2/2/25.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+// !!! NOTICE !!!
+// You may wonder why didn't I put all secret keys into Info.plist file?
+// That's because if someone got your ipa file and exact it
+// then the Info.plist file content can be read directly
+// without any encryption, but in the other spectrum all code
+// files and string files are encrypted by default
+
+
+// For testing only, NEVER put production token here, you MUST encrypt your token
+// You can request one here https://www.pexels.com/api/
+PEXEL_TOKEN = T3oOPuAjki9XveLJnWScPFX0qrQvbUr9nWULXMLM6ehhrcBDtNqNsRUb
+// You can request one here https://openweathermap.org/api
+WEATHER_KEY = 398c6b80565feb41961b84605318d12a

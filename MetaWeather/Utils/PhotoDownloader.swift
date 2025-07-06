@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class PhotoDownloader: NSCopying {
+final class PhotoDownloader: NSCopying, Sendable {
     
     static let shared = PhotoDownloader()
     

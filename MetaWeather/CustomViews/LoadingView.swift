@@ -9,7 +9,7 @@ import UIKit
 import Lottie
 
 class LoadingView: UIView {
-    private let animationView = AnimationView(name: Constants.lottieFileName)
+    private let animationView = LottieAnimationView(name: Constants.lottieFileName)
     
     static let shared = LoadingView()
     

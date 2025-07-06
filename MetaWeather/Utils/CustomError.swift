@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum CustomError: Error, CustomStringConvertible {
+enum CustomError: Error, CustomStringConvertible, Sendable {
     var description: String {
         switch self {
         case .invalidUrl:

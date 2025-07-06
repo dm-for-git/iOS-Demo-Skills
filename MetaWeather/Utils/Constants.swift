@@ -23,7 +23,7 @@ enum Constants {
     static let hcmCoordinate: (Float, Float) = (10.7758439, 106.7017555)
     
     static let apiRootPath = "https://api.openweathermap.org/"
-    static let apiWeather = "data/2.5/weather"
+    static let apiWeather = "data/3.0/onecall"
     static let apiLocation = "geo/1.0/direct"
     
     static let apiIcon = "https://openweathermap.org/img/wn/"

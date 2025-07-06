@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -148,6 +148,11 @@
 		BACE9A1627C8D8FA007D28DF /* NewsHeaderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsHeaderTest.swift; sourceTree = "<group>"; };
 		BAF7D7FE27CA19240049A7BC /* cat-loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "cat-loading.json"; sourceTree = "<group>"; };
 		BAF7D80227CA1F4D0049A7BC /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		D515F8962D4F664E007D265F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D515F8972D4F664E007D265F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D515F8982D4F664E007D265F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		D515F89A2D4F6789007D265F /* DebugConfigs.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = DebugConfigs.xcconfig; sourceTree = "<group>"; };
+		D515F89B2D4F67AB007D265F /* ReleaseConfigs.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ReleaseConfigs.xcconfig; sourceTree = "<group>"; };
 		D53F6DBB28649EC4009F4D1E /* Coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
 		D54EE70328202B9100B0777B /* UIDevice+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+.swift"; sourceTree = "<group>"; };
 		D58310FF28806EFC00274831 /* MetaWeather.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MetaWeather.entitlements; sourceTree = "<group>"; };
@@ -171,7 +176,6 @@
 		FA147E9726BD9A9B007694FE /* WeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCell.swift; sourceTree = "<group>"; };
 		FA147E9826BD9A9B007694FE /* WeatherCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeatherCell.xib; sourceTree = "<group>"; };
 		FA147E9B26BDA717007694FE /* WeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
-		FA5DB1BC26C7F5120095D264 /* Configs.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Configs.xcconfig; path = MetaWeather/Base/Configs.xcconfig; sourceTree = SOURCE_ROOT; };
 		FA8644DB26BD64F100973985 /* MetaWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetaWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA8644DE26BD64F100973985 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA8644E026BD64F100973985 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -289,6 +293,16 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		D515F8992D4F664E007D265F /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				D515F8962D4F664E007D265F /* AppDelegate.swift */,
+				D515F8972D4F664E007D265F /* Info.plist */,
+				D515F8982D4F664E007D265F /* SceneDelegate.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
 		D583110028806FC400274831 /* Notification */ = {
 			isa = PBXGroup;
 			children = (
@@ -354,10 +368,13 @@
 		FA8644D226BD64F100973985 = {
 			isa = PBXGroup;
 			children = (
+				D515F89B2D4F67AB007D265F /* ReleaseConfigs.xcconfig */,
+				D515F89A2D4F6789007D265F /* DebugConfigs.xcconfig */,
 				FA8644DD26BD64F100973985 /* MetaWeather */,
 				FA8644F726BD64F300973985 /* MetaWeatherTests */,
 				D583110A28807EC900274831 /* MetaNotificationService */,
 				FA8644DC26BD64F100973985 /* Products */,
+				D515F8992D4F664E007D265F /* Base */,
 			);
 			sourceTree = "<group>";
 		};
@@ -447,7 +464,6 @@
 			isa = PBXGroup;
 			children = (
 				FA8644EF26BD64F200973985 /* Info.plist */,
-				FA5DB1BC26C7F5120095D264 /* Configs.xcconfig */,
 				FA8644DE26BD64F100973985 /* AppDelegate.swift */,
 				FA8644E026BD64F100973985 /* SceneDelegate.swift */,
 			);
@@ -805,7 +821,6 @@
 /* Begin XCBuildConfiguration section */
 		D583111228807EC900274831 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FA5DB1BC26C7F5120095D264 /* Configs.xcconfig */;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -816,7 +831,7 @@
 				INFOPLIST_FILE = MetaNotificationService/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MetaNotificationService;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -835,7 +850,6 @@
 		};
 		D583111328807EC900274831 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FA5DB1BC26C7F5120095D264 /* Configs.xcconfig */;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -846,7 +860,7 @@
 				INFOPLIST_FILE = MetaNotificationService/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MetaNotificationService;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -865,7 +879,7 @@
 		};
 		FA86450626BD64F300973985 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FA5DB1BC26C7F5120095D264 /* Configs.xcconfig */;
+			baseConfigurationReference = D515F89A2D4F6789007D265F /* DebugConfigs.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -923,12 +937,13 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = complete;
 			};
 			name = Debug;
 		};
 		FA86450726BD64F300973985 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FA5DB1BC26C7F5120095D264 /* Configs.xcconfig */;
+			baseConfigurationReference = D515F89B2D4F67AB007D265F /* ReleaseConfigs.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -979,13 +994,13 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_STRICT_CONCURRENCY = complete;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 		FA86450926BD64F300973985 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FA5DB1BC26C7F5120095D264 /* Configs.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -995,7 +1010,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N7RU9Y475K;
 				INFOPLIST_FILE = MetaWeather/Base/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1011,7 +1026,6 @@
 		};
 		FA86450A26BD64F300973985 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FA5DB1BC26C7F5120095D264 /* Configs.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1021,7 +1035,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N7RU9Y475K;
 				INFOPLIST_FILE = MetaWeather/Base/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1037,7 +1051,6 @@
 		};
 		FA86450C26BD64F300973985 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FA5DB1BC26C7F5120095D264 /* Configs.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1064,7 +1077,6 @@
 		};
 		FA86450D26BD64F300973985 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FA5DB1BC26C7F5120095D264 /* Configs.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";

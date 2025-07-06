@@ -9,7 +9,7 @@ import Foundation
 import Network
 
 
-class ApiManager: NSCopying {
+final class ApiManager: NSCopying, Sendable {
     
     // Prevent instance of this object to be cloned
     func copy(with zone: NSZone? = nil) -> Any {
@@ -33,51 +33,53 @@ class ApiManager: NSCopying {
     }()
     
     // MARK: GET
-    func getRequest(url: String, withBearer: Bool? = false, params: [String: String],
-                    completion: @escaping(Result<Data, CustomError>) -> Void) {
+    func getRequest(url: String, withBearer: Bool? = false, params: [String: String]) async -> Result<Data, CustomError>? {
+        var result : Result<Data, CustomError>?
         dataTask?.cancel()
+      
         if var urlComponents = URLComponents(string: url) {
             if !params.isEmpty {
                 urlComponents.queryItems = createQueryParamFrom(params: params)
             }
             guard let url = urlComponents.url else {
-                completion(.failure(.invalidUrl))
-                return
+                return .failure(.invalidUrl)
             }
             
             var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData)
             request.httpMethod = "GET"
             if let isUsingBearer = withBearer, isUsingBearer == true {
                 guard videoServiceToken != "" else {
-                    completion(.failure(.tokenMissing))
-                    return
+                    return .failure(.tokenMissing)
                 }
-                let bearer = "Bearer \(videoServiceToken)"
-                request.setValue(bearer, forHTTPHeaderField: "Authorization")
+                request.setValue(videoServiceToken, forHTTPHeaderField: "Authorization")
             }
             
-            dataTask = defaultSession.dataTask(with: request, completionHandler: {[weak self] data, response, error in
-                defer {
-                    self?.dataTask = nil
-                }
-                if let err = error as? CustomError {
-                    print("GET request error = \(err.localizedDescription)")
-                    completion(.failure(err))
-                } else if let networkError = error as? URLError {
-                    print("Network error = \(networkError.localizedDescription)")
-                    completion(.failure(.networkError))
-                } else if let response = response as? HTTPURLResponse,
-                            response.statusCode <= 300 {
-                    if let data = data {
-                        completion(.success(data))
+            Task {
+            await dataTask = defaultSession.dataTask(with: request,
+                                                         completionHandler: {[weak self] data, response, error in
+                    defer {
+                        self?.dataTask = nil
                     }
-                } else {
-                    // This is where the HTTP Status Code > 300
-                    completion(.failure(.serverError))
-                }
-            })
-            dataTask?.resume()
+                    if let customError = error as? CustomError {
+                        print("GET request error = \(customError.localizedDescription)")
+                        result = .failure(customError)
+                    } else if let networkError = error as? URLError {
+                        print("Network error = \(networkError.localizedDescription)")
+                        result = .failure(.networkError)
+                    } else if let response = response as? HTTPURLResponse,
+                              response.statusCode <= 300 {
+                        if let data = data {
+                            result = .success(data)
+                        }
+                    } else {
+                        // This is where the HTTP Status Code > 300
+                        result = .failure(.serverError)
+                    }
+                })
+                dataTask?.resume()
+            }
         }
+        return result
     }
     
     // MARK: POST
