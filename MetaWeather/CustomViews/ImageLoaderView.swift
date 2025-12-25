@@ -11,7 +11,7 @@ class ImageLoaderView: UIImageView {
     
     func load(strUrl: String) {
         PhotoDownloader.shared.downloadPhotoFrom(photoUrl: strUrl) { image in
-            DispatchQueue.main.async {[weak self] in
+            Task { @MainActor [weak self] in
                 self?.image = image
             }
         }

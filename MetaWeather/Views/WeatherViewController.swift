@@ -82,7 +82,7 @@ class WeatherViewController: UITableViewController {
     
     private func setupTableView() {
         tableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
-//        tableView.backgroundColor = UIColor(named: "#EFFAFD")
+        //        tableView.backgroundColor = UIColor(named: "#EFFAFD")
         tableView.register(UINib(nibName: cellIdentifier, bundle: nil), forCellReuseIdentifier: cellIdentifier)
         tableView.estimatedRowHeight = UITableView.automaticDimension
         tableView.rowHeight = estimateCellHeight
@@ -93,22 +93,23 @@ class WeatherViewController: UITableViewController {
         
         // First time load data from server
         fetchData()
-        
         LoadingView.shared.stopLoading()
     }
     
     // MARK: Data
     @objc func fetchData() {
-        viewModel.fetchWeather {[weak self] result in
-            DispatchQueue.main.async {
-                if result.isEmpty {
-                    self?.tableView.reloadData()
-                } else {
-                    self?.showMessageBaseOn(type: .error, message: result)
+        Task { @MainActor in
+            await viewModel.fetchWeather { [weak self] result in
+                Task { @MainActor in
+                    if result.isEmpty {
+                        self?.tableView.reloadData()
+                    } else {
+                        self?.showMessageBaseOn(type: .error, message: result)
+                    }
+                    self?.refreshVC.endRefreshing()
+                    LoadingView.shared.stopLoading()
                 }
-                self?.refreshVC.endRefreshing()
             }
-            LoadingView.shared.stopLoading()
         }
     }
     
@@ -159,7 +160,7 @@ extension WeatherViewController {
     }
 }
 
-extension WeatherViewController: ResultViewControllerDelegate {
+extension WeatherViewController: @MainActor ResultViewControllerDelegate {
     func finishChooseCity(coordinate: (Float, Float)) {
         resetSearchUi()
         viewModel.currentCoordinate = coordinate
@@ -171,7 +172,6 @@ extension WeatherViewController: ResultViewControllerDelegate {
         searchVC.searchBar.endEditing(true)
         searchVC.searchBar.text = nil
         searchVC.searchBar.placeholder = String.stringByKey(key: .searchBarPlaceHolder)
-        //        self.dismiss(animated: false)
     }
 }
 

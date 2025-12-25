@@ -28,7 +28,6 @@ class VideoViewController: UICollectionViewController {
 
         NotificationCenter.default.addObserver(self, selector: #selector(networkSubscriber),
                                                name: .networkStatus, object: nil)
-
         setupUi()
         setupData()
     }
@@ -62,22 +61,24 @@ class VideoViewController: UICollectionViewController {
     // MARK: Data Loading
     
     private func setupData() {
-        viewModel.fetchMoreData { [weak self] result in
-            DispatchQueue.main.async {
-                if result.isEmpty {
-                    self?.collectionView.reloadData()
-                } else {
-                    self?.showMessageBaseOn(type: .error, message: result)
+        Task {
+            await viewModel.fetchMoreData { [weak self] result in
+                Task { @MainActor in
+                    if result.isEmpty {
+                        self?.collectionView.reloadData()
+                    } else {
+                        self?.showMessageBaseOn(type: .error, message: result)
+                    }
+                    LoadingView.shared.stopLoading()
                 }
-                LoadingView.shared.stopLoading()
             }
         }
     }
     
-    @objc private func refreshData(_ sender: Any) {
+    @objc private func refreshData(_ sender: Any) async {
         refreshVC?.beginRefreshing()
-        viewModel.fetchMoreData { [weak self] result in
-            DispatchQueue.main.async {
+        await viewModel.fetchMoreData { [weak self] result in
+            Task { @MainActor in
                 if result.isEmpty {
                     self?.viewModel.isLoadingData = false
                     self?.collectionView.reloadData()
@@ -92,23 +93,25 @@ class VideoViewController: UICollectionViewController {
     private func loadMoreData() {
         LoadingView.shared.startLoadingVia(parentView: view)
         viewModel.isLoadingData = true
-        viewModel.fetchMoreData { [weak self] result in
-            DispatchQueue.main.async {
-                if result.isEmpty {
-                    guard let indexPaths = self?.collectionView.indexPathsForVisibleItems else { return }
-                    self?.collectionView.reloadItems(at: indexPaths)
-                    self?.viewModel.isLoadingData = false
-                } else {
-                    self?.showMessageBaseOn(type: .error, message: result)
+        Task {
+            await viewModel.fetchMoreData { [weak self] result in
+                Task { @MainActor in
+                    if result.isEmpty {
+                        guard let indexPaths = self?.collectionView.indexPathsForVisibleItems else { return }
+                        self?.collectionView.reloadItems(at: indexPaths)
+                        self?.viewModel.isLoadingData = false
+                    } else {
+                        self?.showMessageBaseOn(type: .error, message: result)
+                    }
+                    LoadingView.shared.stopLoading()
                 }
             }
-            LoadingView.shared.stopLoading()
         }
     }
     
     // MARK: Utils
     private func showDialog(mess: String, title: String) {
-        DispatchQueue.main.async {[unowned self] in
+        Task { @MainActor [unowned self] in
             let alertVC = UIAlertController(title: title, message: mess, preferredStyle: .alert)
             alertVC.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
             show(alertVC, sender: nil)
@@ -170,7 +173,7 @@ extension VideoViewController: UICollectionViewDelegateFlowLayout {
 }
 
 // MARK: Video Player
-extension VideoViewController: AVPlayerViewControllerDelegate {
+extension VideoViewController: @MainActor AVPlayerViewControllerDelegate {
     
     func playerViewController(_ playerViewController: AVPlayerViewController,
                               restoreUserInterfaceForPictureInPictureStopWithCompletionHandler completionHandler: @escaping (Bool) -> Void) {

@@ -15,7 +15,7 @@ class LoadingView: UIView {
     
     func startLoadingVia(parentView: UIView) {
         stopLoading()
-        DispatchQueue.main.async {[weak self] in
+        Task { @MainActor [weak self] in
             if let animationView = self?.animationView {
                 self?.configAnimationBy(view: parentView)
                 parentView.addSubview(animationView)
@@ -26,7 +26,7 @@ class LoadingView: UIView {
     }
     
     func stopLoading() {
-        DispatchQueue.main.async {[weak self] in
+        Task { @MainActor [weak self] in
             if let animationView = self?.animationView {
                 animationView.stop()
                 animationView.removeFromSuperview()

@@ -20,9 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupNetworkListenner()
         // You've to set this for PiP(Picture in Picture) mode.
         registerAudioCapability()
-        
-        // Setup notification
-        NotificationManager.shared.requestUserPermission()
         return true
     }
     
@@ -48,16 +45,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let queue = DispatchQueue(label: "Network Status Listener")
         monitor.start(queue: queue)
-    }
-    
-    // MARK: - Notification
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        let deviceTokenString = deviceToken.toString()
-        print("\n Device Token = \(deviceTokenString) \n")
-    }
-    
-    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("\n \(error.localizedDescription) \n")
     }
 
     // MARK: - Core Data stack

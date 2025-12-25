@@ -11,7 +11,6 @@ import UIKit
 enum Constants {
     // MARK: Commons
     static let lottieFileName = "cat-loading"
-    static let navigationBarHeight: CGFloat = 44
     
     // MARK: Video
     static let videoServiceToken = "PEXEL_API_KEY"

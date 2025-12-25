@@ -9,26 +9,24 @@ import Foundation
 import CoreData
 import UIKit
 
-class DataManager: NSCopying {
+@MainActor
+class DataManager: @MainActor NSCopying {
     
     static let shared = DataManager()
     
-    // Prevent instance of this object to be cloned
-    func copy(with zone: NSZone? = nil) -> Any {
+    // Prevent instance of this object to be cloned because this class serves as a Singleton
+    nonisolated func copy(with zone: NSZone? = nil) -> Any {
         return self
     }
     
-    func insertWeather(weather: Weather, handler: @escaping(Result<Bool, CustomError>) -> Void) {
-        DispatchQueue.main.async {
-            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-                handler(.failure(.nilError))
-                return
-            }
-            let queue = OperationQueue()
-            queue.maxConcurrentOperationCount = 3
-            queue.addOperation {
-                let context = appDelegate.persistentContainer.viewContext
-                
+    func insertWeather(weather: Weather) async throws {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            throw CustomError.nilError
+        }
+        let context = appDelegate.persistentContainer.viewContext
+        // Do Core Data work on the context's queue
+        do {
+            try await context.perform {
                 let weatherEntity = WeatherEntity(context: context)
                 weatherEntity.currentTemp = weather.currentTemp ?? 0
                 weatherEntity.maxTemp = weather.maxTemp ?? 0
@@ -36,86 +34,56 @@ class DataManager: NSCopying {
                 weatherEntity.weatherStatus = weather.status
                 weatherEntity.cityName = weather.cityName
                 weatherEntity.iconCode = weather.iconCode
-                
-                do {
-                    try context.save()
-                    handler(.success(true))
-                } catch {
-                    print("Data Error = \(error)")
-                    handler(.failure(error as! CustomError))
-                }
+                try context.save()
             }
-            queue.waitUntilAllOperationsAreFinished()
+        } catch {
+            print(error.localizedDescription)
         }
     }
     
-    func fetchAllWeathers(handler: @escaping(Result<[Weather], CustomError>) -> Void) {
-        DispatchQueue.main.async {
-            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-                handler(.failure(.nilError))
-                return
+    func fetchAllWeathers() async throws -> [Weather] {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            throw CustomError.nilError
+        }
+
+        let context = appDelegate.persistentContainer.viewContext
+
+        return try await context.perform {
+            let request = WeatherEntity.fetchRequest()
+            let weatherEntities = try context.fetch(request)
+            guard !weatherEntities.isEmpty else {
+                throw CustomError.nilError
             }
-            let queue = OperationQueue()
-            queue.maxConcurrentOperationCount = 3
-            
-            queue.addOperation {
-                
-                let context = appDelegate.persistentContainer.viewContext
-                
-                do {
-                    let weatherEntities = try context.fetch(WeatherEntity.fetchRequest()) as? [WeatherEntity]
-                    if let weatherEntities = weatherEntities, !weatherEntities.isEmpty {
-                        var weathers = [Weather]()
-                        weatherEntities.forEach { item in
-                            var weather = Weather()
-                            weather.currentTemp = item.currentTemp
-                            weather.maxTemp = item.maxTemp
-                            weather.minTemp = item.minTemp
-                            weather.cityName = item.cityName
-                            weather.status = item.weatherStatus
-                            weather.iconCode = item.iconCode
-                            weathers.append(weather)
-                        }
-                        handler(.success(weathers))
-                    } else {
-                        handler(.failure(.nilError))
-                    }
-                    
-                } catch {
-                    print("Data Error = \(error.localizedDescription)")
-                    handler(.failure(error as! CustomError))
-                }
+            return weatherEntities.map { item in
+                var weather = Weather()
+                weather.currentTemp = item.currentTemp
+                weather.maxTemp = item.maxTemp
+                weather.minTemp = item.minTemp
+                weather.cityName = item.cityName
+                weather.status = item.weatherStatus
+                weather.iconCode = item.iconCode
+                return weather
             }
-            queue.waitUntilAllOperationsAreFinished()
         }
     }
     
-    func deleteAllData(entityName: String, handler: @escaping(Result<Bool, CustomError>) -> Void) {
-        DispatchQueue.main.async {
-            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-                handler(.failure(.nilError))
-                return
-            }
-            let queue = OperationQueue()
-            queue.maxConcurrentOperationCount = 3
-            
-            queue.addOperation {
-                
-                let context = appDelegate.persistentContainer.viewContext
-                
+    func deleteAllData(entityName: String) async throws -> Bool {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            throw CustomError.nilError
+        }
+
+        let context = appDelegate.persistentContainer.viewContext
+        do {
+            try await context.perform {
                 let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
-                
-                // Create Batch Delete Request
                 let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-                
-                do {
-                    try context.execute(batchDeleteRequest)
-                    handler(.success(true))
-                } catch {
-                    handler(.failure(error as! CustomError))
-                }
+                try context.execute(batchDeleteRequest)
             }
-            queue.waitUntilAllOperationsAreFinished()
+            return true
+        } catch {
+            print(error.localizedDescription)
+            return false
         }
     }
 }
+

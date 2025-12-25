@@ -40,7 +40,7 @@ extension UIViewController {
     
     func showMessageBaseOn(type: Theme, message: String) {
         let messageView = MessageView.viewFromNib(layout: .cardView)
-        DispatchQueue.main.async {
+        Task { @MainActor in
             switch type {
             case .success:
                 messageView.configureTheme(.success)

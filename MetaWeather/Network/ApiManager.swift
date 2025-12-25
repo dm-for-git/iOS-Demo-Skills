@@ -11,6 +11,9 @@ import Network
 
 final class ApiManager: NSCopying, Sendable {
     
+    // To prevent this class be initialized multiple times
+    private init() {}
+    
     // Prevent instance of this object to be cloned
     func copy(with zone: NSZone? = nil) -> Any {
         return self
@@ -33,7 +36,7 @@ final class ApiManager: NSCopying, Sendable {
     }()
     
     // MARK: GET
-    func getRequest(url: String, withBearer: Bool? = false, params: [String: String]) async -> Result<Data, CustomError>? {
+    func getRequest(url: String, withBearer: Bool? = false, params: [String: String]) -> Result<Data, CustomError>? {
         var result : Result<Data, CustomError>?
         dataTask?.cancel()
       
@@ -55,7 +58,7 @@ final class ApiManager: NSCopying, Sendable {
             }
             
             Task {
-            await dataTask = defaultSession.dataTask(with: request,
+            dataTask = defaultSession.dataTask(with: request,
                                                          completionHandler: {[weak self] data, response, error in
                     defer {
                         self?.dataTask = nil
@@ -192,5 +195,32 @@ final class ApiManager: NSCopying, Sendable {
         }
         print("\n Weather Service Token is missing \n")
         return ""
+    }
+}
+
+// MARK: - Custom Error
+enum CustomError: Error, CustomStringConvertible, Sendable {
+    case invalidUrl
+    case networkError
+    case fileError
+    case tokenMissing
+    case serverError
+    case nilError
+    
+    var description: String {
+        switch self {
+        case .invalidUrl:
+            return "The URL is incorrect!!!"
+        case .fileError:
+            return "An error has been occurred"
+        case .networkError:
+            return "Your internet connection has problem"
+        case .tokenMissing:
+            return "Service token is missing"
+        case .serverError:
+            return "Server is temporary unavailable now"
+        case .nilError:
+            return "You're trying to access a NIL value!!!"
+        }
     }
 }
